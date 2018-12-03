@@ -5,4 +5,6 @@ Foton chat is an experimental application for the following stuffs we wanna try 
 - Hooks
 - Apollo Hooks
 - Subscriptions
+- Optimistic Update
+- Apollo link state
 - Chat Application
