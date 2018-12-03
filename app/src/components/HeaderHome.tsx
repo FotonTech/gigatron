@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { View } from 'react-native';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import { SafeArea } from '../utils';
 
 const Wrapper = styled.View`

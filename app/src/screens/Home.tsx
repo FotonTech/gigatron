@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { Animated, Dimensions, FlatList, ActivityIndicator } from 'react-native';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import { withNavigationFocus } from 'react-navigation';
 
 import HeaderHome from '../components/HeaderHome';

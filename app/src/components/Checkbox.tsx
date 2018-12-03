@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Dimensions, Switch } from 'react-native';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
 const { width } = Dimensions.get('window');
 

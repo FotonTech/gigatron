@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { TouchableOpacity, Alert, AsyncStorage, Platform, SafeAreaView } from 'react-native';
 import { useMutation } from 'react-apollo-hooks';
 import { NavigationScreenProps } from 'react-navigation';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { RouteNames } from '../config/Router';
@@ -21,7 +20,7 @@ const LOGIN_MUTATION = gql`
 const Wrapper = styled.View`
   flex: 1;
   align-items: center;
-  background-color: ${(props: any) => props.theme.colors.primaryBackground};
+  background-color: ${props => props.theme.colors.primaryBackground};
 `;
 
 const ButtonsWrapper = styled.View`
@@ -155,7 +154,6 @@ const Login = (props: Props) => {
               <Button text="Cadastrar" onPress={() => props.navigation.navigate(RouteNames.SignUp)} />
             </ButtonsWrapper>
           </Container>
-        {Platform.OS === 'ios' && <KeyboardSpacer />}
       </Wrapper>
     );
 }

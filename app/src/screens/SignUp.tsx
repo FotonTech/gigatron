@@ -1,8 +1,7 @@
 
 import React, { Component } from 'react';
 import { ScrollView, Alert, AsyncStorage, Platform } from 'react-native';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import { images } from '../assets';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -179,7 +178,6 @@ class SignUp extends Component<void, State> {
               <Button disabled={this.state.isLoading} text="Cadastrar" onPress={this.onSubmit} />
             </ButtonsContainer>
           </Container>
-        {Platform.OS === 'ios' && <KeyboardSpacer />}
       </Wrapper>
     );
   }

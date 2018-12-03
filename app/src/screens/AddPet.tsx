@@ -1,8 +1,7 @@
 
 import React, { Component } from 'react';
 import { ScrollView, Alert, Platform } from 'react-native';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import Input from '../components/Input';
 import Checkbox from '../components/Checkbox';
 import Header from '../components/Header';
@@ -153,7 +152,6 @@ class AddPet extends Component {
             />
           </Container>
         </ScrollView>
-        {Platform.OS === 'ios' && <KeyboardSpacer />}
       </Wrapper>
     );
   }

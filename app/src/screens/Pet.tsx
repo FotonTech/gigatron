@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { ScrollView, Animated, Dimensions, ActivityIndicator } from 'react-native';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import { withNavigationFocus } from 'react-navigation';
 
 import { SafeArea } from '../utils';
