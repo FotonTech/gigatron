@@ -1,16 +1,13 @@
-import React, { Component, useState } from 'react';
-import { TouchableOpacity, ScrollView, Alert, AsyncStorage, Platform, View } from 'react-native';
+import React, { useState } from 'react';
+import { TouchableOpacity, Alert, AsyncStorage, Platform, SafeAreaView } from 'react-native';
 import { useMutation } from 'react-apollo-hooks';
 import { NavigationScreenProps } from 'react-navigation';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import styled from 'styled-components';
-import { images } from '../assets';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { RouteNames } from '../config/Router';
-import { SafeArea } from '../utils';
 import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
 
 const LOGIN_MUTATION = gql`
   mutation LoginEmailMutation($input: LoginEmailInput!) {
@@ -131,7 +128,7 @@ const Login = (props: Props) => {
 
     return (
       <Wrapper>
-        <SafeArea />
+        <SafeAreaView />
           <Container>
             <TitleWrapper>
               <WelcomeText>⚡</WelcomeText>
