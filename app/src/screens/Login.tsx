@@ -1,6 +1,7 @@
-// @flow
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useState } from 'react';
 import { TouchableOpacity, ScrollView, Alert, AsyncStorage, Platform, View } from 'react-native';
+import { useMutation } from 'react-apollo-hooks';
+import { NavigationScreenProps } from 'react-navigation';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import styled from 'styled-components';
 import { images } from '../assets';
@@ -23,7 +24,7 @@ const LOGIN_MUTATION = gql`
 const Wrapper = styled.View`
   flex: 1;
   align-items: center;
-  background-color: ${p => p.theme.colors.primaryBackground};
+  background-color: ${(props: any) => props.theme.colors.primaryBackground};
 `;
 
 const ButtonsWrapper = styled.View`
@@ -57,59 +58,69 @@ const IndicationText = styled.Text`
 const Link = styled.Text`
   font-size: 16;
   font-weight: 300;
-  color: ${props => props.theme.colors.primaryText};
-  margin-top: ${props => props.margintop};
+  color: ${(props: any) => props.theme.colors.primaryText};
+  margin-top: ${(props: any) => props.margintop};
   margin-bottom: 10;
 `;
 
 const Container = styled.View`
   flex: 1;
-  width: 100%;
   align-items: center;
   justify-content: center;
 `;
 
-class Login extends Component {
-  state = {
+interface Props {
+  email: string
+  password: string
+  isLoading: string
+  navigation: NavigationScreenProps
+}
+
+const Login = (props: Props) => {
+  const [state, setState] = useState({
     email: '',
     password: '',
     isLoading: false,
-  };
+  })
+  const login = useMutation(LOGIN_MUTATION);
 
-  onChangeField = (targetField: string, value: string) => {
-    this.setState({
+  const onChangeField = (targetField: string, value: string) => {
+    setState({
+      ...state,
       [targetField]: value,
     });
   };
 
-  onSubmit = async () => {
-    const { email, password } = this.state;
+  const onSubmit = async () => {
+    const { email, password } = state;
 
     const onCompleted = async res => {
       const response = res && res.LoginEmail;
       const token = response && response.token;
       if (response && response.error) {
-        this.setState({
+        setState({
+          ...state,
           isLoading: false,
         });
         return Alert.alert('Erro', 'Usuario ou senha invalidos!');
       } else if (token) {
-        this.setState({
+        setState({
+          ...state,
           isLoading: false,
         });
         await AsyncStorage.setItem('token', token);
-        this.props.navigation.navigate(RouteNames.Home);
+        props.navigation.navigate(RouteNames.Home);
       }
     };
     const onError = () => {
-      this.setState({
+      setState({
+        ...state,
         isLoading: false,
       });
       return Alert.alert('Erro', 'Verifique sua conexão com a internet');
     };
 
-    this.props
-      .mutate({ variables: { input: { email, password } } })
+    login({ variables: { input: { email, password } } })
       .then(({ data }) => {
         onCompleted(data);
       })
@@ -118,7 +129,6 @@ class Login extends Component {
       });
   };
 
-  render() {
     return (
       <Wrapper>
         <SafeArea />
@@ -129,29 +139,28 @@ class Login extends Component {
               <Input
                 secureTextEntry={false}
                 placeholder="Email"
-                onChangeText={value => this.onChangeField('email', value)}
-                value={this.state.email}
+                onChangeText={value => onChangeField('email', value)}
+                value={state.email}
               />
               <Input
                 placeholder="Password"
-                onChangeText={value => this.onChangeField('password', value)}
+                onChangeText={value => onChangeField('password', value)}
                 secureTextEntry={true}
-                value={this.state.password}
+                value={state.password}
               />
             </TitleWrapper>
             <ButtonsWrapper>
               <TouchableOpacity>
                 <Link margintop={30}>Esqueci minha senha</Link>
               </TouchableOpacity>
-              <Button disabled={this.state.isLoading} text="Entrar" onPress={this.onSubmit} />
+              <Button disabled={state.isLoading} text="Entrar" onPress={onSubmit} />
               <Link margintop={10}>Ainda não e cadastrado</Link>
-              <Button text="Cadastrar" onPress={() => this.props.navigation.navigate(RouteNames.SignUp)} />
+              <Button text="Cadastrar" onPress={() => props.navigation.navigate(RouteNames.SignUp)} />
             </ButtonsWrapper>
           </Container>
         {Platform.OS === 'ios' && <KeyboardSpacer />}
       </Wrapper>
     );
-  }
 }
 
-export default graphql(LOGIN_MUTATION)(Login);
+export default (Login);

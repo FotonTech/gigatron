@@ -1,10 +1,11 @@
-// @flow
-import React, { Component, useState, useEffect } from 'react';
+
+import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 import { createRootNavigator } from './config/Router';
-import { images } from './assets/index';
 import styled, { ThemeProvider } from 'styled-components';
 import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
+
 import client from './config/ApolloEnv';
 import theme from './config/theme';
 
@@ -25,11 +26,11 @@ const Zap = () => (
   <WelcomeText>⚡</WelcomeText>
 )
 
-type Props = {};
+interface Props {};
 
-type State = {
-  token: string,
-  loading: boolean,
+interface State {
+  token: string | null
+  loading: boolean
 };
 
 class App extends Component<Props, State> {
@@ -58,9 +59,11 @@ class App extends Component<Props, State> {
       return (
         <ThemeProvider theme={theme}>
           <ApolloProvider client={client}>
-            <LoadingWrapper>
-              <Zap />
-            </LoadingWrapper>
+            <ApolloHooksProvider client={client}>
+              <LoadingWrapper>
+                <Zap />
+              </LoadingWrapper>
+            </ApolloHooksProvider>
           </ApolloProvider>
         </ThemeProvider>
       );
@@ -69,7 +72,9 @@ class App extends Component<Props, State> {
     return (
       <ThemeProvider theme={theme}>
         <ApolloProvider client={client}>
-          <Router />
+          <ApolloHooksProvider client={client}>
+            <Router />
+          </ApolloHooksProvider>
         </ApolloProvider>
       </ThemeProvider>
     );

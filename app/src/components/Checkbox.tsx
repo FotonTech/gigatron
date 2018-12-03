@@ -1,4 +1,4 @@
-// @flow
+
 import React from 'react';
 import { Dimensions, Switch } from 'react-native';
 import styled from 'styled-components';

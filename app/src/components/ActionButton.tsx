@@ -1,4 +1,4 @@
-// @flow
+
 import React from 'react';
 import { Platform } from 'react-native';
 import styled, { css, StyledComponentClass } from 'styled-components';

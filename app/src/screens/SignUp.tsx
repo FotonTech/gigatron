@@ -1,4 +1,4 @@
-// @flow
+
 import React, { Component } from 'react';
 import { ScrollView, Alert, AsyncStorage, Platform } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';

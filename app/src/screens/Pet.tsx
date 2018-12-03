@@ -1,4 +1,4 @@
-// @flow
+
 import * as React from 'react';
 import { ScrollView, Animated, Dimensions, ActivityIndicator } from 'react-native';
 import styled from 'styled-components';
