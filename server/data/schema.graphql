@@ -1,0 +1,182 @@
+input ChangePasswordInput {
+  oldPassword: String!
+
+  """user new password"""
+  password: String!
+  clientMutationId: String
+}
+
+type ChangePasswordPayload {
+  error: String
+  me: User
+  clientMutationId: String
+}
+
+input LoginEmailInput {
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type LoginEmailPayload {
+  token: String
+  error: String
+  clientMutationId: String
+}
+
+type Mutation {
+  LoginEmail(input: LoginEmailInput!): LoginEmailPayload
+  RegisterEmail(input: RegisterEmailInput!): RegisterEmailPayload
+  ChangePassword(input: ChangePasswordInput!): ChangePasswordPayload
+  PetAdd(input: PetAddInput!): PetAddPayload
+  PetDelete(input: PetDeleteInput!): PetDeletePayload
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+"""Pet data"""
+type Pet implements Node {
+  """The ID of an object"""
+  id: ID!
+  _id: String
+  image: String
+  owner: User
+  name: String
+  gender: String
+  port: String
+  birthDate: String
+  color: String
+  castrated: Boolean
+  alergic: [String]
+  race: String
+  type: String
+}
+
+input PetAddInput {
+  name: String!
+  castrated: Boolean!
+  alergic: [String]
+  gender: String!
+  port: String!
+  birthDate: String!
+  color: String!
+  doctor: String
+  image: String
+  race: String!
+  type: String!
+  clientMutationId: String
+}
+
+type PetAddPayload {
+  status: Boolean
+  message: String
+  error: String
+  pet: Pet
+  clientMutationId: String
+}
+
+"""A connection to a list of items."""
+type PetConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PetEdge]
+  count: Int
+}
+
+input PetDeleteInput {
+  id: String!
+  clientMutationId: String
+}
+
+type PetDeletePayload {
+  status: Boolean
+  message: String
+  error: String
+  clientMutationId: String
+}
+
+"""An edge in a connection."""
+type PetEdge {
+  """The item at the end of the edge"""
+  node: Pet
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""The root of all... queries"""
+type Query {
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+  me: User
+  pet(petId: String!): Pet
+  pets(after: String, first: Int, before: String, last: Int): PetConnection
+  user(id: ID!): User
+  users(after: String, first: Int, before: String, last: Int, search: String): UserConnection
+}
+
+input RegisterEmailInput {
+  name: String!
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type RegisterEmailPayload {
+  token: String
+  error: String
+  clientMutationId: String
+}
+
+"""User data"""
+type User implements Node {
+  """The ID of an object"""
+  id: ID!
+  _id: String
+  name: String
+  email: String
+  active: Boolean
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]
+  count: Int
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge"""
+  node: User
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
