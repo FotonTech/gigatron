@@ -1,4 +1,4 @@
-// @flow
+
 import DataLoader from 'dataloader';
 import type { ConnectionArguments } from 'graphql-relay';
 import { connectionFromMongoCursor, mongooseLoader } from '@entria/graphql-mongoose-loader';

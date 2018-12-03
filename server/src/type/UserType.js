@@ -1,4 +1,4 @@
-// @flow
+
 
 import { GraphQLObjectType, GraphQLString, GraphQLBoolean } from 'graphql';
 import { globalIdField } from 'graphql-relay';

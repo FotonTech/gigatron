@@ -1,4 +1,4 @@
-// @flow
+
 
 import path from 'path';
 import dotenvSafe from 'dotenv-safe';

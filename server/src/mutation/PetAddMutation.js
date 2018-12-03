@@ -1,4 +1,4 @@
-// @flow
+
 
 import { GraphQLString, GraphQLNonNull, GraphQLBoolean, GraphQLList } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';

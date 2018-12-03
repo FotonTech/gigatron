@@ -1,4 +1,4 @@
-// @flow
+
 import mongoose from 'mongoose';
 import * as loaders from '../src/loader';
 
