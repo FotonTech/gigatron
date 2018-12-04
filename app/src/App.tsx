@@ -40,7 +40,7 @@ class App extends Component<Props, State> {
   };
 
   componentDidMount() {
-    AsyncStorage.clear();
+    // AsyncStorage.clear();
     setTimeout(() => {
       AsyncStorage.getItem('token').then(value => {
         this.setState({

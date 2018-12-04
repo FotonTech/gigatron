@@ -117,7 +117,7 @@ const Login = (props: NavigationInjectedProps) => {
         <SafeAreaView />
           <Container>
               <Formik
-                initialValues={{ email: 'guilhermejabu', password: 'passw' }}
+                initialValues={{ email: '', password: '' }}
                 onSubmit={values => onSubmit({ ...values })}
                 validationSchema={yup.object().shape({
                   email: yup
