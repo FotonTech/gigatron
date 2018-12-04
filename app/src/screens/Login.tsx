@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, Alert, AsyncStorage, Platform, SafeAreaView } from 'react-native';
+import { Alert, AsyncStorage, Platform, SafeAreaView } from 'react-native';
+import { NavigationInjectedProps } from 'react-navigation'
 import { useMutation } from 'react-apollo-hooks';
-import { NavigationScreenProps } from 'react-navigation';
 import styled from 'styled-components/native';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import Text from '../components/Text';
 import { RouteNames } from '../config/Router';
 import gql from 'graphql-tag';
 
@@ -25,9 +26,7 @@ const Wrapper = styled.View`
 
 const ButtonsWrapper = styled.View`
   flex: 1;
-  padding-bottom: 20;
   justify-content: center;
-
 `;
 
 const TitleWrapper = styled.View`
@@ -36,27 +35,9 @@ const TitleWrapper = styled.View`
   justify-content: flex-end;
 `;
 
-const WelcomeText = styled.Text`
-  font-size: 53;
-  font-weight: 500;
-  color: black;
-  margin-top: 30;
-`;
-
-const IndicationText = styled.Text`
-  font-size: 18;
-  color: white;
-  margin-bottom: 10;
-  font-weight: 500;
-`;
-
-
-const Link = styled.Text`
-  font-size: 16;
-  font-weight: 300;
-  color: ${(props: any) => props.theme.colors.primaryText};
-  margin-top: ${(props: any) => props.margintop};
-  margin-bottom: 10;
+const TextsWrapper = styled.View`
+  margin-bottom: 20;
+  align-items: center;
 `;
 
 const Container = styled.View`
@@ -65,14 +46,7 @@ const Container = styled.View`
   justify-content: center;
 `;
 
-interface Props {
-  email: string
-  password: string
-  isLoading: string
-  navigation: NavigationScreenProps
-}
-
-const Login = (props: Props) => {
+const Login = (props: NavigationInjectedProps) => {
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -89,8 +63,18 @@ const Login = (props: Props) => {
 
   const onSubmit = async () => {
     const { email, password } = state;
+    setState({
+      ...state,
+      isLoading: true,
+    });
 
-    const onCompleted = async res => {
+    interface ResponseInterface {
+      LoginEmail: {
+        token: string
+        error: string
+      }
+    }
+    const onCompleted = async (res: ResponseInterface) => {
       const response = res && res.LoginEmail;
       const token = response && response.token;
       if (response && response.error) {
@@ -98,7 +82,7 @@ const Login = (props: Props) => {
           ...state,
           isLoading: false,
         });
-        return Alert.alert('Erro', 'Usuario ou senha invalidos!');
+        return Alert.alert('Erro', 'Usuário ou senha inválidos!');
       } else if (token) {
         setState({
           ...state,
@@ -130,8 +114,10 @@ const Login = (props: Props) => {
         <SafeAreaView />
           <Container>
             <TitleWrapper>
-              <WelcomeText>⚡</WelcomeText>
-              <IndicationText>Faça o login para continuar</IndicationText>
+              <TextsWrapper>
+                <Text size="huge" tint="primary">⚡</Text>
+                <Text size="big" tint="primary" strong>Faça o login para continuar</Text>
+              </TextsWrapper>
               <Input
                 secureTextEntry={false}
                 placeholder="Email"
@@ -146,11 +132,7 @@ const Login = (props: Props) => {
               />
             </TitleWrapper>
             <ButtonsWrapper>
-              <TouchableOpacity>
-                <Link margintop={30}>Esqueci minha senha</Link>
-              </TouchableOpacity>
-              <Button disabled={state.isLoading} text="Entrar" onPress={onSubmit} />
-              <Link margintop={10}>Ainda não e cadastrado</Link>
+              <Button disabled={state.isLoading} text="Entrar" onPress={onSubmit} isLoading={state.isLoading}/>
               <Button text="Cadastrar" onPress={() => props.navigation.navigate(RouteNames.SignUp)} />
             </ButtonsWrapper>
           </Container>

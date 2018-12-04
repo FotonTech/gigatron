@@ -8,11 +8,11 @@ const { width } = Dimensions.get('window');
 const Wrapper = styled.TextInput`
   margin-top: 20;
   padding: 10px;
-  border-bottom-color: white;
-  color: white;
+  border-bottom-color: ${p => p.theme.colors.primaryText};
+  color: ${p => p.theme.colors.primaryText};
   border-bottom-width: 2;
   width: ${width - 40};
-  font-size: 16;
+  font-size: ${p => p.theme.fontSizes.normal};
   font-weight: 600;
 `;
 

@@ -1,30 +1,29 @@
 
 import React from 'react';
-import { Platform } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
+import Text from './Text'
 
 const Wrapper = styled.TouchableOpacity`
-  padding: 15px 30px;
+  padding: 15px 65px;
   background-color: ${props => (props.disabled ? 'grey' : '#ffffff')};
   border-radius: 25;
   align-items: center;
   justify-content: center;
+  margin-top: 20;
 `;
 
-const Text = styled.Text`
-  color: ${p => p.theme.colors.primaryBackground};
-  font-weight: bold;
-`;
 
-type Props = {
-  text: string,
-  onPress: () => any,
-  disabled?: boolean,
+interface Props {
+  text: string
+  onPress: () => any
+  disabled?: boolean
+  isLoading?: boolean
 };
 
-const Button = ({ text, onPress, disabled }: Props) => (
-  <Wrapper disabled={disabled} onPress={onPress}>
-    <Text>{text}</Text>
+const Button = ({ text, onPress, disabled, isLoading }: Props) => (
+  <Wrapper disabled={disabled || isLoading} onPress={onPress}>
+    {isLoading ? (<ActivityIndicator />) : (<Text size="small" tint="secondary" strong>{text}</Text>)}
   </Wrapper>
 );
 
