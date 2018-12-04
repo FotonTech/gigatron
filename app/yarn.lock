@@ -685,7 +685,7 @@
     "@types/prop-types" "*"
     "@types/react" "*"
 
-"@types/react-navigation@^2.13.7":
+"@types/react-navigation@^2.6.2":
   version "2.13.7"
   resolved "https://registry.yarnpkg.com/@types/react-navigation/-/react-navigation-2.13.7.tgz#a0b8d7823001c4ee6d295d1738e570f928c00f98"
   integrity sha512-gLyd69KzKTu5huj+FYFf63ia2TOlyLcUIlCod5ZsKNtr5Qu18Lq//6l8hlr1lHu+5YVVe9OuMPe5ivfg3SsLSQ==
