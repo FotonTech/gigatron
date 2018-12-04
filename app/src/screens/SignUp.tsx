@@ -144,7 +144,7 @@ const Signup = (props: NavigationInjectedProps) => {
                     <TitleWrapper>
                       <TextsWrapper>
                         <Text size="huge" tint="primary">⚡</Text>
-                        <Text size="big" tint="primary" strong>Crie sua conta</Text>
+                        <Text size="big" tint="primary" strong>Register</Text>
                       </TextsWrapper>
                       <Input
                         label="Name"
@@ -167,7 +167,7 @@ const Signup = (props: NavigationInjectedProps) => {
                       />
                     </TitleWrapper>
                     <ButtonsWrapper>
-                      <Button disabled={state.isLoading} text="Cadastrar" onPress={handleSubmit} isLoading={state.isLoading} disabled={!isValid} />
+                      <Button text="Register" onPress={handleSubmit} isLoading={state.isLoading} disabled={!isValid || state.isLoading} />
                     </ButtonsWrapper>
                   </React.Fragment>
                 )}

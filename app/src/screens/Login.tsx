@@ -135,7 +135,7 @@ const Login = (props: NavigationInjectedProps) => {
                     <TitleWrapper>
                       <TextsWrapper>
                         <Text size="huge" tint="primary">⚡</Text>
-                        <Text size="big" tint="primary" strong>Faça o login para continuar</Text>
+                        <Text size="big" tint="primary" strong>Login</Text>
                       </TextsWrapper>
                       <Input
                         label="Email"
@@ -152,7 +152,7 @@ const Login = (props: NavigationInjectedProps) => {
                       />
                     </TitleWrapper>
                     <ButtonsWrapper>
-                      <Button disabled={state.isLoading} text="Entrar" onPress={handleSubmit} isLoading={state.isLoading} disabled={!isValid} />
+                      <Button text="Entrar" onPress={handleSubmit} isLoading={state.isLoading} disabled={!isValid || state.isLoading} />
                       <Button text="Cadastrar" onPress={() => props.navigation.navigate(RouteNames.SignUp)} />
                     </ButtonsWrapper>
                   </React.Fragment>
