@@ -1,14 +1,15 @@
-
-import React, { Component } from 'react';
-import { ScrollView, Alert, AsyncStorage, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, AsyncStorage, Platform, SafeAreaView } from 'react-native';
+import { NavigationInjectedProps } from 'react-navigation'
+import { useMutation } from 'react-apollo-hooks';
 import styled from 'styled-components/native';
-import { images } from '../assets';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import { SafeArea } from '../utils';
+import Text from '../components/Text';
 import { RouteNames } from '../config/Router';
 import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
+import { Formik } from 'formik'
+import * as yup from 'yup'
 
 const REGISTER_MUTATION = gql`
   mutation RegisterEmailMutation($input: RegisterEmailInput!) {
@@ -18,85 +19,53 @@ const REGISTER_MUTATION = gql`
     }
   }
 `;
-
 const Wrapper = styled.View`
   flex: 1;
-  align-items: center;
-  background-color: ${p => p.theme.colors.primaryBackground};
-`;
-
-const WelcomeText = styled.Text`
-  font-size: 53;
-  font-weight: 500;
-  color: ${p => p.theme.colors.primaryText};
-  margin-top: 30;
+  background-color: ${props => props.theme.colors.primaryBackground};
+  padding: 0 20px 0 20px;
 `;
 
 const ButtonsWrapper = styled.View`
   flex: 1;
-  padding-bottom: 20;
   justify-content: center;
-
+  align-items: center;
 `;
 
 const TitleWrapper = styled.View`
   flex: 1;
-  align-items: center;
   justify-content: flex-end;
 `;
 
-const Link = styled.Text`
-  font-size: 16;
-  font-weight: 300;
-  color: black;
-  margin-top: ${props => props.margintop};
-  margin-bottom: 10;
-`;
-
-const IndicationText = styled.Text`
-  font-size: 18;
-  color: ${p => p.theme.colors.primaryText};
-  margin-bottom: 10;
-  font-weight: 500;
+const TextsWrapper = styled.View`
+  margin-bottom: 20;
+  align-items: center;
 `;
 
 const Container = styled.View`
   flex: 1;
-  width: 100%;
-  align-items: center;
   justify-content: center;
 `;
 
-const ButtonsContainer = styled.View`
-flex: 1;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-`;
-
-type State = {
-  email: string,
-  password: string,
-  name: string,
-  isLoading: boolean,
-};
-
-class SignUp extends Component<void, State> {
-  state = {
-    email: '',
-    password: '',
-    name: '',
+const Signup = (props: NavigationInjectedProps) => {
+  const [state, setState] = useState({
     isLoading: false,
-  };
+  })
+  const register = useMutation(REGISTER_MUTATION);
 
-  onSubmit = async () => {
-    const { name, email, password } = this.state;
+  interface valuesType {
+    email: string
+    password: string
+    name: string
+  }
+  const onSubmit = async (values: valuesType) => {
+    const { name, email, password } = values;
 
     if (!name || !email || !password) {
       return Alert.alert('Erro', 'Preencha todos os campos!');
     }
 
-    this.setState({
+    setState({
+      ...state,
       isLoading: true,
     });
 
@@ -106,33 +75,41 @@ class SignUp extends Component<void, State> {
       password,
     };
 
-    const onCompleted = async res => {
+    interface ResponseInterface {
+      RegisterEmail: {
+        token: string
+        error: string
+      }
+    }
+    const onCompleted = async (res: ResponseInterface) => {
       const response = res && res.RegisterEmail;
       const token = response && response.token;
       if (response && response.error) {
-        this.setState({
+        setState({
+          ...state,
           isLoading: false,
         });
-        return Alert.alert('Erro', 'Email já cadastrado na plataforma');
+        return Alert.alert('Erro', 'Email already registered');
       } else if (token) {
-        this.setState({
+        setState({
+          ...state,
           isLoading: false,
         });
         await AsyncStorage.setItem('token', token);
-        Alert.alert('Sucesso', 'Cadastrado com sucesso!');
-        this.props.navigation.navigate(RouteNames.Home);
+        Alert.alert('Sucesso', 'Success!');
+        props.navigation.navigate(RouteNames.Home);
       }
     };
 
     const onError = () => {
-      this.setState({
+      setState({
+        ...state,
         isLoading: true,
       });
       return Alert.alert('Erro', 'Verifique sua conexão com a internet');
     };
 
-    this.props
-      .mutate({ variables: { input: { name, email, password } } })
+    register({ variables: { input: { name, email, password } } })
       .then(({ data }) => {
         onCompleted(data);
       })
@@ -141,46 +118,63 @@ class SignUp extends Component<void, State> {
       });
   };
 
-  onChangeField = (targetField: string, value: string) => {
-    this.setState({
-      [targetField]: value,
-    });
-  };
-  render() {
     return (
       <Wrapper>
-        <SafeArea />
+        <SafeAreaView />
           <Container>
-            <TitleWrapper>
-              <WelcomeText>⚡</WelcomeText>
-              <IndicationText>Preencha os campos para continuar</IndicationText>
-              <Input
-                secureTextEntry={false}
-                placeholder="Email"
-                onChangeText={value => this.onChangeField('email', value)}
-                value={this.state.email}
-              />
-              <Input
-                secureTextEntry={false}
-                placeholder="Nome Completo"
-                onChangeText={value => this.onChangeField('name', value)}
-                value={this.state.name}
-              />
-              <Input
-                placeholder="Password"
-                onChangeText={value => this.onChangeField('password', value)}
-                secureTextEntry={true}
-                value={this.state.password}
-              />
-            </TitleWrapper>
-
-            <ButtonsContainer>
-              <Button disabled={this.state.isLoading} text="Cadastrar" onPress={this.onSubmit} />
-            </ButtonsContainer>
+              <Formik
+                initialValues={{ name: '', email: 'guilhermejabur@outlook.com', password: 'passw' }}
+                onSubmit={values => onSubmit({ ...values })}
+                validationSchema={yup.object().shape({
+                  name: yup
+                    .string()
+                    .required('Name is required'),
+                  email: yup
+                    .string()
+                    .email('Invalid email')
+                    .required('Email is required'),
+                  password: yup
+                    .string()
+                    .min(6, 'Password must be at least 6 length')
+                    .required('Password is required'),
+                })}
+              >
+                {({values, handleChange, handleSubmit, errors, isValid}: FormikProps) => (
+                  <React.Fragment>
+                    <TitleWrapper>
+                      <TextsWrapper>
+                        <Text size="huge" tint="primary">⚡</Text>
+                        <Text size="big" tint="primary" strong>Crie sua conta</Text>
+                      </TextsWrapper>
+                      <Input
+                        label="Name"
+                        onChange={handleChange('name')}
+                        value={values.name}
+                        errorMessage={errors.name}
+                      />
+                      <Input
+                        label="Email"
+                        onChange={handleChange('email')}
+                        value={values.email}
+                        errorMessage={errors.email}
+                      />
+                      <Input
+                        label="Password"
+                        onChange={handleChange('password')}
+                        value={values.password}
+                        errorMessage={errors.password}
+                        isSecure
+                      />
+                    </TitleWrapper>
+                    <ButtonsWrapper>
+                      <Button disabled={state.isLoading} text="Cadastrar" onPress={handleSubmit} isLoading={state.isLoading} disabled={!isValid} />
+                    </ButtonsWrapper>
+                  </React.Fragment>
+                )}
+              </Formik>
           </Container>
       </Wrapper>
     );
-  }
 }
 
-export default graphql(REGISTER_MUTATION)(SignUp);
+export default Signup;

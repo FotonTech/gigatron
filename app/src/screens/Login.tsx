@@ -8,6 +8,8 @@ import Button from '../components/Button';
 import Text from '../components/Text';
 import { RouteNames } from '../config/Router';
 import gql from 'graphql-tag';
+import { Formik } from 'formik'
+import * as yup from 'yup'
 
 const LOGIN_MUTATION = gql`
   mutation LoginEmailMutation($input: LoginEmailInput!) {
@@ -20,18 +22,18 @@ const LOGIN_MUTATION = gql`
 
 const Wrapper = styled.View`
   flex: 1;
-  align-items: center;
   background-color: ${props => props.theme.colors.primaryBackground};
+  padding: 0 20px 0 20px;
 `;
 
 const ButtonsWrapper = styled.View`
   flex: 1;
   justify-content: center;
+  align-items: center;
 `;
 
 const TitleWrapper = styled.View`
   flex: 1;
-  align-items: center;
   justify-content: flex-end;
 `;
 
@@ -42,14 +44,11 @@ const TextsWrapper = styled.View`
 
 const Container = styled.View`
   flex: 1;
-  align-items: center;
   justify-content: center;
 `;
 
 const Login = (props: NavigationInjectedProps) => {
   const [state, setState] = useState({
-    email: '',
-    password: '',
     isLoading: false,
   })
   const login = useMutation(LOGIN_MUTATION);
@@ -61,8 +60,12 @@ const Login = (props: NavigationInjectedProps) => {
     });
   };
 
-  const onSubmit = async () => {
-    const { email, password } = state;
+  interface valuesType {
+    email: string
+    password: string
+  }
+  const onSubmit = async (values: valuesType) => {
+    const { email, password } = values;
     setState({
       ...state,
       isLoading: true,
@@ -113,28 +116,48 @@ const Login = (props: NavigationInjectedProps) => {
       <Wrapper>
         <SafeAreaView />
           <Container>
-            <TitleWrapper>
-              <TextsWrapper>
-                <Text size="huge" tint="primary">⚡</Text>
-                <Text size="big" tint="primary" strong>Faça o login para continuar</Text>
-              </TextsWrapper>
-              <Input
-                secureTextEntry={false}
-                placeholder="Email"
-                onChangeText={value => onChangeField('email', value)}
-                value={state.email}
-              />
-              <Input
-                placeholder="Password"
-                onChangeText={value => onChangeField('password', value)}
-                secureTextEntry={true}
-                value={state.password}
-              />
-            </TitleWrapper>
-            <ButtonsWrapper>
-              <Button disabled={state.isLoading} text="Entrar" onPress={onSubmit} isLoading={state.isLoading}/>
-              <Button text="Cadastrar" onPress={() => props.navigation.navigate(RouteNames.SignUp)} />
-            </ButtonsWrapper>
+              <Formik
+                initialValues={{ email: 'guilhermejabu', password: 'passw' }}
+                onSubmit={values => onSubmit({ ...values })}
+                validationSchema={yup.object().shape({
+                  email: yup
+                    .string()
+                    .email('Invalid email')
+                    .required('Email is required'),
+                  password: yup
+                    .string()
+                    .min(6, 'Password must be at least 6 length')
+                    .required('Password is required'),
+                })}
+              >
+                {({values, handleChange, handleSubmit, errors, isValid}: FormikProps) => (
+                  <React.Fragment>
+                    <TitleWrapper>
+                      <TextsWrapper>
+                        <Text size="huge" tint="primary">⚡</Text>
+                        <Text size="big" tint="primary" strong>Faça o login para continuar</Text>
+                      </TextsWrapper>
+                      <Input
+                        label="Email"
+                        onChange={handleChange('email')}
+                        value={values.email}
+                        errorMessage={errors.email}
+                      />
+                      <Input
+                        label="Password"
+                        onChange={handleChange('password')}
+                        value={values.password}
+                        errorMessage={errors.password}
+                        isSecure
+                      />
+                    </TitleWrapper>
+                    <ButtonsWrapper>
+                      <Button disabled={state.isLoading} text="Entrar" onPress={handleSubmit} isLoading={state.isLoading} disabled={!isValid} />
+                      <Button text="Cadastrar" onPress={() => props.navigation.navigate(RouteNames.SignUp)} />
+                    </ButtonsWrapper>
+                  </React.Fragment>
+                )}
+              </Formik>
           </Container>
       </Wrapper>
     );

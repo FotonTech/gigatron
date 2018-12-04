@@ -4,6 +4,7 @@ export default {
     secondaryText: '#7F00FF',
     disabled: 'grey',
     primaryBackground: '#7F00FF',
+    error: 'red',
   },
   fontSizes: {
     small: 13,
