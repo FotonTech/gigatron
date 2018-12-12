@@ -2,15 +2,13 @@ import { StackNavigator, createSwitchNavigator } from 'react-navigation';
 import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
 import Home from '../screens/Home';
-import AddPet from '../screens/AddPet';
-import Pet from '../screens/Pet';
+import Chat from '../screens/Chat';
 
 export const RouteNames = {
   Login: 'Login',
   SignUp: 'SignUp',
   Home: 'Home',
-  AddPet: 'AddPet',
-  Pet: 'Pet',
+  Chat: 'Chat',
   Logged: 'Logged',
   NonLogged: 'NonLogged',
 };
@@ -31,8 +29,7 @@ const NonLoggedAppRouter = StackNavigator(
 const LoggedAppRouter = StackNavigator(
   {
     [RouteNames.Home]: { screen: Home },
-    [RouteNames.AddPet]: { screen: AddPet },
-    [RouteNames.Pet]: { screen: Pet },
+    [RouteNames.Chat]: { screen: Chat },
   },
   {
     initialRouteName: RouteNames.Home,

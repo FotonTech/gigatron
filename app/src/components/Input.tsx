@@ -1,14 +1,24 @@
 import React, { useState } from 'react'
 import * as Animatable from 'react-native-animatable'
 import styled from 'styled-components/native'
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Hideo } from 'react-native-textinput-effects';
+import { iOSUIKit } from 'react-native-typography'
+
+const OutWrapper = styled.View`
+  width: 100%;
+  margin-top: 15;
+  margin-bottom: 15;
+`;
 
 const Wrapper = styled.View`
-  align-self: center;
   width: 100%;
-  justify-content: center;
-  align-items: center;
   background-color: ${(p: any) => p.theme.colors.primaryBackground};
-  margin-top: 30;
+  z-index: 999;
+  border-radius: 20px;
+  background-color: red;
+  height: 45px;
+  overflow: hidden;
 `
 
 const StyledInput = styled.TextInput`
@@ -21,16 +31,12 @@ const StyledInput = styled.TextInput`
   color: ${(p: any) => p.theme.colors.primaryText};
 `
 
-const FloatingLabel = styled(Animatable.Text).attrs({
-  transition: ['bottom', 'color', 'fontSize'],
-  duration: 150,
-})`
-  position: absolute;
-  left: 0;
-  bottom: ${(p: any) => (p.isFocused ? 25 : 4)};
-  font-size: ${(p: any) =>
-    p.isFocused ? p.theme.fontSizes.small : p.theme.fontSizes.normal};
+const Label = styled.Text`
+  font-size: ${(p: any) => p.theme.fontSizes.medium};
   color: ${(p: any) => (p.isFocused ? p.theme.colors.primaryText : p.theme.colors.primaryText)};
+  font-weight: bold;
+  margin-left: 10;
+  padding-bottom: 10;
 `
 
 const ErrorLabel = styled(Animatable.Text)`
@@ -44,6 +50,7 @@ const ErrorLabel = styled(Animatable.Text)`
 interface Props {
   value: string
   label: string
+  iconName: string
   onChange: void
   isSecure?: boolean
   errorMessage?: string
@@ -61,6 +68,7 @@ const Input = ({
   onChange,
   isSecure = false,
   errorMessage,
+  iconName,
   ...rest
 }: Props) => {
   const [state, setState] = useState({
@@ -79,21 +87,24 @@ const Input = ({
   }
 
   return (
-    <Wrapper>
-      <FloatingLabel isFocused={isFocused}>{label}</FloatingLabel>
-        <StyledInput
-          onChangeText={(val: string) => onChange(val)}
-          value={value}
-          secureTextEntry={isSecure}
-          autoCapitalize="none"
-          isFocused={isFocused}
-          isError={errorMessage && validate}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          {...rest}
-        />
+    <OutWrapper>
+      <Label>{label}</Label>
+      <Wrapper>
+          <Hideo
+            iconClass={FontAwesomeIcon}
+            iconName={iconName}
+            iconColor={errorMessage ? 'red' : '#7F00FF'}
+            // this is used as backgroundColor of icon container view.
+            iconBackgroundColor={'white'}
+            inputStyle={{ color: 'black',   height: 45 }}
+            style={{ borderRadius: 20}}
+            onChangeText={onChange}
+            secureTextEntry={isSecure}
+            autoCapitalize="none"
+          />
+      </Wrapper>
       {errorMessage && <ErrorLabel>{errorMessage}</ErrorLabel>}
-    </Wrapper>
+    </OutWrapper>
   )
 }
 

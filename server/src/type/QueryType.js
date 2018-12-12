@@ -5,16 +5,20 @@ import { connectionArgs, fromGlobalId } from 'graphql-relay';
 
 import UserType from './UserType';
 import PetType from './PetType';
+import ConversationType from './ConversationType';
 import { NodeField } from '../interface/NodeInterface';
 import {
   UserLoader,
   PetLoader,
+  ConversationLoader,
+  MessageLoader,
 } from '../loader';
 import UserConnection from '../connection/UserConnection';
 import PetConnection from '../connection/PetConnection';
+import ConversationConnection from '../connection/ConversationConnection';
+import MessageConnection from '../connection/MessageConnection';
 import type { UserType as UserFlowTypes, UserConnection as UserConnectionFlowTypes } from '../loader/UserLoader';
 import type { PetType as PetFlowTypes } from '../type/PetType';
-import type { PetConnection as PetConnectionFlowTypes } from '../loader/PetLoader';
 import type { GraphQLContext, ConnectionArguments } from '../TypeDefinition';
 
 type PetQueryInput = {
@@ -50,8 +54,34 @@ export default new GraphQLObjectType({
       args: {
         ...connectionArgs,
       },
-      resolve: (obj, args: ConnectionArguments, context: GraphQLContext): Promise<?PetConnectionFlowTypes> =>
+      resolve: (obj, args: ConnectionArguments, context: GraphQLContext) =>
         PetLoader.loadPets(context, args),
+    },
+    conversation: {
+      type: ConversationType,
+      args: {
+        conversationId: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
+      },
+      resolve: (root, args, context: GraphQLContext): Promise<?PetFlowTypes> =>
+        ConversationLoader.load(context, args.conversationId),
+    },
+    conversations: {
+      type: ConversationConnection.connectionType,
+      args: {
+        ...connectionArgs,
+      },
+      resolve: (obj, args: ConnectionArguments, context: GraphQLContext) =>
+        ConversationLoader.loadConversations(context, args),
+    },
+    messages: {
+      type: MessageConnection.connectionType,
+      args: {
+        ...connectionArgs,
+      },
+      resolve: (obj, args: ConnectionArguments, context: GraphQLContext) =>
+        MessageLoader.loadMessages(context, args),
     },
     user: {
       type: UserType,

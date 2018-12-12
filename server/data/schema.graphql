@@ -12,6 +12,37 @@ type ChangePasswordPayload {
   clientMutationId: String
 }
 
+"""Conversation data"""
+type Conversation implements Node {
+  """The ID of an object"""
+  id: ID!
+  _id: String
+  owner: User
+  otherUser: User
+  lastMessage: String
+  updatedAt: String
+  messages: Message
+}
+
+"""A connection to a list of items."""
+type ConversationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ConversationEdge]
+  count: Int
+}
+
+"""An edge in a connection."""
+type ConversationEdge {
+  """The item at the end of the edge"""
+  node: Conversation
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
 input LoginEmailInput {
   email: String!
   password: String!
@@ -24,10 +55,20 @@ type LoginEmailPayload {
   clientMutationId: String
 }
 
+"""message data"""
+type Message implements Node {
+  """The ID of an object"""
+  id: ID!
+  _id: String
+  owner: User
+  text: String
+}
+
 type Mutation {
   LoginEmail(input: LoginEmailInput!): LoginEmailPayload
   RegisterEmail(input: RegisterEmailInput!): RegisterEmailPayload
   ChangePassword(input: ChangePasswordInput!): ChangePasswordPayload
+  StartConversation(input: StartConversationInput!): StartConversationPayload
   PetAdd(input: PetAddInput!): PetAddPayload
   PetDelete(input: PetDeleteInput!): PetDeletePayload
 }
@@ -135,6 +176,8 @@ type Query {
   me: User
   pet(petId: String!): Pet
   pets(after: String, first: Int, before: String, last: Int): PetConnection
+  conversation(conversationId: String!): Conversation
+  conversations(after: String, first: Int, before: String, last: Int): ConversationConnection
   user(id: ID!): User
   users(after: String, first: Int, before: String, last: Int, search: String): UserConnection
 }
@@ -149,6 +192,19 @@ input RegisterEmailInput {
 type RegisterEmailPayload {
   token: String
   error: String
+  clientMutationId: String
+}
+
+input StartConversationInput {
+  email: String!
+  clientMutationId: String
+}
+
+type StartConversationPayload {
+  status: Boolean
+  message: String
+  error: String
+  conversation: Conversation
   clientMutationId: String
 }
 

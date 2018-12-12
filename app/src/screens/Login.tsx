@@ -53,13 +53,6 @@ const Login = (props: NavigationInjectedProps) => {
   })
   const login = useMutation(LOGIN_MUTATION);
 
-  const onChangeField = (targetField: string, value: string) => {
-    setState({
-      ...state,
-      [targetField]: value,
-    });
-  };
-
   interface valuesType {
     email: string
     password: string
@@ -142,12 +135,14 @@ const Login = (props: NavigationInjectedProps) => {
                         onChange={handleChange('email')}
                         value={values.email}
                         errorMessage={errors.email}
+                        iconName="envelope"
                       />
                       <Input
                         label="Password"
                         onChange={handleChange('password')}
                         value={values.password}
                         errorMessage={errors.password}
+                        iconName="lock"
                         isSecure
                       />
                     </TitleWrapper>

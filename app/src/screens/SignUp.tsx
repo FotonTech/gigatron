@@ -32,7 +32,7 @@ const ButtonsWrapper = styled.View`
 `;
 
 const TitleWrapper = styled.View`
-  flex: 1;
+  flex: 2;
   justify-content: flex-end;
 `;
 
@@ -96,7 +96,6 @@ const Signup = (props: NavigationInjectedProps) => {
           isLoading: false,
         });
         await AsyncStorage.setItem('token', token);
-        Alert.alert('Sucesso', 'Success!');
         props.navigation.navigate(RouteNames.Home);
       }
     };
@@ -151,12 +150,14 @@ const Signup = (props: NavigationInjectedProps) => {
                         onChange={handleChange('name')}
                         value={values.name}
                         errorMessage={errors.name}
+                        iconName="user"
                       />
                       <Input
                         label="Email"
                         onChange={handleChange('email')}
                         value={values.email}
                         errorMessage={errors.email}
+                        iconName="envelope"
                       />
                       <Input
                         label="Password"
@@ -164,6 +165,7 @@ const Signup = (props: NavigationInjectedProps) => {
                         value={values.password}
                         errorMessage={errors.password}
                         isSecure
+                        iconName="lock"
                       />
                     </TitleWrapper>
                     <ButtonsWrapper>

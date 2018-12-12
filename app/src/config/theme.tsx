@@ -9,6 +9,7 @@ export default {
   fontSizes: {
     small: 13,
     normal: 16,
+    medium: 20,
     big: 25,
     huge: 53,
   }
