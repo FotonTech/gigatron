@@ -9,7 +9,7 @@
       "config": {"distDir": "build"}
     },
     {
-      "src": "packages/server/src/index.js",
+      "src": "packages/server/dist/index.js",
       "use": "@now/node-server"
     }
   ],
