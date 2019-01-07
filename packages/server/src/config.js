@@ -1,9 +1,18 @@
-require('now-env');
+import dotenvSafe from 'dotenv-safe';
+
+if (!process.env.NOW_REGION) {
+  dotenvSafe.load({
+    path: root('.env'),
+    sample: root('.env.example'),
+  });
+}
 
 // Database Settings
 const dBdevelopment = process.env.MONGO_URL || 'mongodb://localhost/fotonChat';
 const dBproduction = process.env.MONGO_URL || 'mongodb://localhost/fotonChat';
 
+console.log('dBdevelopment', dBdevelopment);
+console.log('dBproduction', dBproduction);
 // Test Database Settings
 // const test = 'mongodb://localhost/awesome-test';
 
