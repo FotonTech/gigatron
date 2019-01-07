@@ -18,8 +18,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var root = _path2.default.join.bind(undefined, __dirname, '../');
 
 _dotenvSafe2.default.load({
-  path: root('.env'),
-  sample: root('.env.example')
+  path: root('.env')
 });
 
 // Database Settings
