@@ -14,7 +14,7 @@
     }
   ],
   "routes": [
-    {"src": "^/graphql", "dest": "/packages/server/src/index.js"},
+    {"src": "^/graphql", "dest": "/packages/server/dist/index.js"},
     {"src": "^/static/(.*)", "dest": "/packages/web/static/$1"},
     {"src": "^/favicon.ico", "dest": "/packages/web/favicon.ico"},
     {"src": "^/asset-manifest.json", "dest": "/packages/web/asset-manifest.json"},
