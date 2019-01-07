@@ -24,6 +24,6 @@ function connectDatabase() {
       return resolve(_mongoose2.default.connections[0]);
     });
 
-    _mongoose2.default.connect(_config.databaseConfig);
+    _mongoose2.default.connect(_config.databaseConfig, { useNewUrlParser: true });
   });
 }
