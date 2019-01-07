@@ -1,6 +1,5 @@
 packages/app
 packages/server/node_modules
-packages/server/dist
 packages/web/node_modules
 packages/web/build
 .vscode
