@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { Text, FlatList, ActivityIndicator, SafeAreaView } from 'react-native';
+import { Text, FlatList, ActivityIndicator, SafeAreaView, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import { useMutation } from 'react-apollo-hooks';
 
@@ -9,6 +9,15 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import Loading from '../components/Loading'
 import { RouteNames } from '../config/Router';
+
+import { images } from '../assets/index';
+
+const HangImage = styled.Image.attrs({
+  source: images.hang,
+  resizeMode: 'contain',
+})`
+  width: ${Dimensions.get('window').width - 40};
+`;
 
 type Props = {
   isFetching?: boolean,
@@ -139,7 +148,7 @@ const Home = (props: Props) => {
         {data.loading ? <Loading /> : (
           isEmpty ? (
             <EmptyWrapper>
-              <EmptyText>Inicie uma conversa para continuar</EmptyText>
+              <HangImage />
             </EmptyWrapper>
           ) : (
             <FlatList

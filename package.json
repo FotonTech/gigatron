@@ -1,0 +1,11 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.8.5"
+  },
+  "scripts": {
+    "start:server": "lerna run watch --scope @foton/server --stream",
+    "start:app": "lerna run start --scope @foton/app --stream",
+  }
+}
