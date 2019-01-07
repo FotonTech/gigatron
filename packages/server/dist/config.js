@@ -5,11 +5,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.jwtSecret = exports.graphqlPort = exports.databaseConfig = undefined;
 
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
 var _dotenvSafe = require('dotenv-safe');
 
 var _dotenvSafe2 = _interopRequireDefault(_dotenvSafe);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var root = _path2.default.join.bind(null, __dirname);
 
 if (!process.env.NOW_REGION) {
   _dotenvSafe2.default.load({

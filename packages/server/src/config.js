@@ -1,4 +1,7 @@
+import path from 'path';
 import dotenvSafe from 'dotenv-safe';
+
+const root = path.join.bind(null, __dirname);
 
 if (!process.env.NOW_REGION) {
   dotenvSafe.load({
