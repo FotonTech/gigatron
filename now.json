@@ -2,29 +2,57 @@
   "version": 2,
   "name": "foton-chat",
   "public": true,
-  "builds": [
-    {
+  "builds": [{
       "src": "packages/web/package.json",
       "use": "@now/static-build",
-      "config": {"distDir": "build"}
+      "config": {
+        "distDir": "build"
+      }
     },
     {
       "src": "packages/server/dist/index.js",
       "use": "@now/node-server"
     }
   ],
-  "routes": [
-    {"src": "^/graphql", "dest": "/packages/server/dist/index.js"},
-    {"src": "^/static/(.*)", "dest": "/packages/web/static/$1"},
-    {"src": "^/favicon.ico", "dest": "/packages/web/favicon.ico"},
-    {"src": "^/asset-manifest.json", "dest": "/packages/web/asset-manifest.json"},
-    {"src": "^/manifest.json", "dest": "/packages/web/manifest.json"},
+  "routes": [{
+      "src": "^/graphql",
+      "dest": "/packages/server/dist/index.js"
+    },
+    {
+      "src": "^/static/(.*)",
+      "dest": "/packages/web/static/$1"
+    },
+    {
+      "src": "^/favicon.ico",
+      "dest": "/packages/web/favicon.ico"
+    },
+    {
+      "src": "^/asset-manifest.json",
+      "dest": "/packages/web/asset-manifest.json"
+    },
+    {
+      "src": "^/manifest.json",
+      "dest": "/packages/web/manifest.json"
+    },
     {
       "src": "^/service-worker.js",
-      "headers": {"cache-control": "s-maxage=0"},
+      "headers": {
+        "cache-control": "s-maxage=0"
+      },
       "dest": "/packages/web/service-worker.js"
     },
-    {"src": "^/precache-manifest.(.*)", "dest": "/packages/web/precache-manifest.$1"},
-    {"src": "^/(.*)", "dest": "/packages/web/index.html"}
-  ]
+    {
+      "src": "^/precache-manifest.(.*)",
+      "dest": "/packages/web/precache-manifest.$1"
+    },
+    {
+      "src": "^/(.*)",
+      "dest": "/packages/web/index.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "development",
+    "GRAPHQL_PORT": "5000",
+    "JWT_KEY": "awesome_secret_key"
+  }
 }
