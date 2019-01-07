@@ -1,16 +1,12 @@
-/*
 import path from 'path';
-
 import dotenvSafe from 'dotenv-safe';
 
 const root = path.join.bind(this, __dirname, '../');
 
-
 dotenvSafe.load({
   path: root('.env'),
-  sample: root('.env.example'),
 });
-*/
+
 // Database Settings
 const dBdevelopment = process.env.MONGO_URL || 'mongodb://localhost/fotonChat';
 const dBproduction = process.env.MONGO_URL || 'mongodb://localhost/fotonChat';
