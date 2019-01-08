@@ -1,11 +1,19 @@
 {
   "name": "root",
   "private": true,
+  "workspaces": ["@foton/app", "@foton/server", "@foton/web"]
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-typescript": "^7.1.0",
     "lerna": "^3.8.5"
   },
   "scripts": {
     "start:server": "lerna run watch --scope @foton/server --stream",
     "start:app": "lerna run start --scope @foton/app --stream"
+  },
+  "dependencies": {
+    "graphql": "^14.0.2"
   }
 }
