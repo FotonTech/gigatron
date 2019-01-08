@@ -4,18 +4,11 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx babel ./src --out-dir lib --extensions '.ts,.tsx'"
+    "build": "babel ./src --out-dir lib --extensions '.ts,.tsx'",
+    "dev": "yarn build -w"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "babel-core": "^7.0.0-bridge.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-typescript": "^7.0.0"
-  },
   "dependencies": {
     "graphql": "^14.0.2"
   }

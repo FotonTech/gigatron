@@ -1,13 +1,14 @@
 {
   "name": "root",
   "private": true,
-  "workspaces": ["@foton/app", "@foton/server", "@foton/web"]
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.2.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
-    "@babel/preset-env": "^7.2.3",
-    "@babel/preset-typescript": "^7.1.0",
-    "lerna": "^3.8.5"
+    "@babel/cli": "^7.2.3",
+    "lerna": "^3.8.5",
+    "typescript": "^3.2.2",
+    "babel-preset-gigatron": "0.0.1"
   },
   "scripts": {
     "start:server": "lerna run watch --scope @foton/server --stream",
