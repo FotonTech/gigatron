@@ -11,6 +11,7 @@
     "babel-preset-gigatron": "0.0.1"
   },
   "scripts": {
+    "start": "lerna run start",
     "start:server": "lerna run watch --scope @foton/server --stream",
     "start:app": "lerna run start --scope @foton/app --stream"
   },
