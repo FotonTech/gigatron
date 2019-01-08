@@ -1,5 +1,5 @@
 import {
-    graphql,
+	graphql,
 	GraphQLSchema,
 	GraphQLObjectType,
   	GraphQLString
@@ -14,7 +14,7 @@ var schema = new GraphQLSchema({
 				resolve() {
 					return 'world';
 				}
-		    }
+		  }
 		}
 	})
 });

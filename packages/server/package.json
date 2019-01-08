@@ -5,11 +5,12 @@
   "main": "index.ts",
   "scripts": {
     "build": "babel ./src --out-dir lib --extensions '.ts,.tsx'",
-    "dev": "yarn build -w"
+    "dev": "ts-node src/app.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "graphql": "^14.0.2"
+    "graphql": "^14.0.2",
+    "ts-node": "^7.0.1"
   }
 }
