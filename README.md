@@ -1,6 +1,6 @@
 <h1 align="center">
 <br>
-  <a href="https://github.com/FotonTech/gigatron"><img src="https://1d4chan.org/images/thumb/a/a8/Autobot.png/225px-Autobot.png" alt="Gigatron" width=228"></a>
+  <a href="https://github.com/FotonTech/gigatron"><img src="https://i.imgur.com/LVlSk6u.gif" alt="Gigatron" width=228"></a>
 <br>
 Gigatron
 </h1>
