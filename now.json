@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "foton-chat",
+  "name": "gigatron",
   "public": true,
   "builds": [{
       "src": "packages/web/package.json",
@@ -10,13 +10,13 @@
       }
     },
     {
-      "src": "packages/server/dist/index.js",
+      "src": "packages/server/src/index.ts",
       "use": "@now/node-server"
     }
   ],
   "routes": [{
       "src": "^/graphql",
-      "dest": "/packages/server/dist/index.js"
+      "dest": "/packages/server/src/index.ts"
     },
     {
       "src": "^/static/(.*)",
