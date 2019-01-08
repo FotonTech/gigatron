@@ -23,18 +23,6 @@ Gigatron
 
 This boilerplate contains all you need to start your next monorepo Fullstack project.
 
-## Features
-
-This boilerplate features all the latest tools and practices in the industry.
-
-- ⚛ **React** — 16.7.0-alpha.0 with Hooks
-- ♻ **Redux** — State Management
-- 🛠 **Babel** — ES6 syntax, Airbnb & React/Recommended config
-- 🚀 **Webpack**  — Hot Reloading, Code Splitting, Optimized Build
-- 💅 **CSS** — Styled Components
-- ✅  **Tests** — Jest, React Testing Library & Cypress
-- 💖  **Lint** — ESlint
-- 🐶  **Husky** — Prevent bad commits
 
 ## Getting started
 
