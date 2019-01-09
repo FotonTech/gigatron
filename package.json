@@ -6,12 +6,14 @@
   ],
   "devDependencies": {
     "@babel/cli": "^7.2.3",
+    "@babel/node": "^7.2.2",
+    "@types/graphql": "^14.0.4",
+    "babel-preset-gigatron": "0.0.1",
     "lerna": "^3.8.5",
-    "typescript": "^3.2.2",
-    "babel-preset-gigatron": "0.0.1"
+    "typescript": "^3.2.2"
   },
   "scripts": {
-    "start:server": "lerna run watch --scope @foton/server --stream",
+    "start:server": "lerna run start --scope @foton/server --stream",
     "start:app": "lerna run start --scope @foton/app --stream"
   },
   "dependencies": {
