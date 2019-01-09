@@ -1,26 +1,22 @@
-import {
-	graphql,
-	GraphQLSchema,
-	GraphQLObjectType,
-  	GraphQLString
-} from 'graphql';
 
-var schema = new GraphQLSchema({
-	query: new GraphQLObjectType({
-		name: 'RootQueryType',
-		fields: {
-		    hello: {
-				type: GraphQLString,
-				resolve() {
-					return 'world';
-				}
-		  }
-		}
-	})
+//graphql(query)
+import graphql from './graphql';
+import Koa from 'koa';
+const app = new Koa();
+
+app.use(async (ctx: any) => {
+	const { method, url } = ctx;
+	//change to POST
+	if(method === 'GET' && url === '/graphql') {
+		/*
+		const exampleQuery = '{ hello }';
+
+		const result = await graphql(exampleQuery)
+		ctx.body = result;
+		*/
+		ctx.body = ctx;
+	}
+
 });
 
-var query = '{ hello }';
-
-graphql(schema, query).then(result => {
-	console.log(result);
-});
+app.listen(3000);

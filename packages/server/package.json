@@ -5,12 +5,16 @@
   "main": "index.ts",
   "scripts": {
     "build": "babel ./src --out-dir lib --extensions '.ts,.tsx'",
-    "dev": "ts-node src/app.ts"
+    "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "graphql": "^14.0.2",
+    "koa": "^2.6.2",
     "ts-node": "^7.0.1"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.48"
   }
 }
