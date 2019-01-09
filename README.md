@@ -1,6 +1,6 @@
 <h1 align="center">
 <br>
-  <a href="https://github.com/leonardomso/react-bolt"><img src="https://i1.wp.com/static.vectorcharacters.net/uploads/2016/12/Vector_Robot_1.png" alt="Gigatron" width=228"></a>
+  <a href="https://github.com/FotonTech/gigatron"><img src="https://i.imgur.com/LVlSk6u.gif" alt="Gigatron" width=228"></a>
 <br>
 Gigatron
 </h1>

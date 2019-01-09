@@ -13,6 +13,7 @@
     "typescript": "^3.2.2"
   },
   "scripts": {
+    "start": "lerna run start",
     "start:server": "lerna run start --scope @foton/server --stream",
     "start:app": "lerna run start --scope @foton/app --stream"
   },
