@@ -8,5 +8,23 @@
   ],
   "imageSize": 100,
   "commit": true,
-  "contributors": []
+  "contributors": [
+    {
+      "login": "jaburcodes",
+      "name": "Jabur",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/13947203?v=4",
+      "profile": "https://github.com/jaburcodes",
+      "contributions": [
+        "question",
+        "bug",
+        "code",
+        "design",
+        "doc",
+        "example",
+        "ideas",
+        "infra",
+        "review"
+      ]
+    }
+  ]
 }
