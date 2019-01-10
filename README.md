@@ -1,5 +1,4 @@
 <h1 align="center">
-[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)
 <br>
   <a href="https://github.com/FotonTech/gigatron"><img src="https://i.imgur.com/LVlSk6u.gif" alt="Gigatron" width=228"></a>
 <br>
@@ -14,6 +13,9 @@ Gigatron
   </a>
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License MIT">
+  </a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square" alt="">
   </a>
 </p>
 
