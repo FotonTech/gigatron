@@ -16,6 +16,7 @@
   "scripts": {
     "start": "lerna run start",
     "start:server": "lerna run start --scope @foton/server --stream",
+    "start:web": "lerna run start --scope @foton/web --stream",
     "start:app": "lerna run start --scope @foton/app --stream"
   },
   "dependencies": {
