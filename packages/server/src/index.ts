@@ -1,22 +1,20 @@
+import { ApolloServer } from 'apollo-server';
+import { graphql, GraphQLSchema, GraphQLObjectType, GraphQLString} from 'graphql';
 
-//graphql(query)
-import graphql from './graphql';
-import Koa from 'koa';
-const app = new Koa();
+const schema = new GraphQLSchema({
+  query: new GraphQLObjectType({
+    name: 'RootQueryType',
+    fields: {
+      hello: {
+        type: GraphQLString,
+        resolve: () => 'world'
+      }
+    }
+  })
+})
 
-app.use(async (ctx: any) => {
-	const { method, url } = ctx;
-	//change to POST
-	if(method === 'GET' && url === '/graphql') {
-		/*
-		const exampleQuery = '{ hello }';
+const server = new ApolloServer({ schema });
 
-		const result = await graphql(exampleQuery)
-		ctx.body = result;
-		*/
-		ctx.body = ctx;
-	}
-
-});
-
-app.listen(3000);
+server.listen().then(({ url }) => {
+  console.log(`Server ready at ${url}`)
+})

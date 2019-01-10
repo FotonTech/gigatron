@@ -1,20 +1,17 @@
 {
-  "name": "@foton/server",
+  "name": "server",
   "version": "0.0.1",
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "build": "babel ./src --out-dir lib --extensions '.ts,.tsx'",
-    "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-server": "^2.3.1",
     "graphql": "^14.0.2",
-    "koa": "^2.6.2",
-    "ts-node": "^7.0.1"
-  },
-  "devDependencies": {
-    "@types/koa": "^2.0.48"
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
   }
 }
