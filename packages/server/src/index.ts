@@ -1,14 +1,12 @@
 import { ApolloServer } from 'apollo-server';
-import { graphql, GraphQLSchema, GraphQLObjectType, GraphQLString} from 'graphql';
+import { GraphQLSchema, GraphQLObjectType, GraphQLString} from 'graphql';
+import rootQuery from './modules/rootQuery';
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
-      hello: {
-        type: GraphQLString,
-        resolve: () => 'world'
-      }
+      ...rootQuery
     }
   })
 })
