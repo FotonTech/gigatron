@@ -1,5 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLNonNull, GraphQLID} from 'graphql';
-import UserModel from './UserModel';
+import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLNonNull, GraphQLID, GraphQLBoolean} from 'graphql';
 
 const UserType = new GraphQLObjectType({
   name: 'UserType',
@@ -15,6 +14,10 @@ const UserType = new GraphQLObjectType({
     email: {
       type: GraphQLString,
       resolve: (o) => o.email
+    },
+    hasNextPage: {
+      type: GraphQLBoolean,
+      resolve: (o) => o.hasNextPage
     }
   }
 })
