@@ -31,6 +31,7 @@ This boilerplate contains all you need to start your next monorepo Fullstack pro
 1. Clone this repo using `https://github.com/FotonTech/gigatron.git`
 2. Move to the appropriate directory: `cd gigatron`.<br />
 3. Run `yarn` to install dependencies.<br />
+4. Creat `.env` file in `./packages/server` with `MONGOOSE=mongo_url`<br />
 
 ## Commands
 
