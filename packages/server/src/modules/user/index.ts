@@ -1,6 +1,6 @@
 import UserType from './UserType';
 import UserModel from './UserModel';
-import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLObjectType, GraphQLBoolean} from 'graphql';
+import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLObjectType, GraphQLBoolean } from 'graphql';
 
 const UserConnectionType = new GraphQLObjectType({
   name: 'UserConnection',
