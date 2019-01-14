@@ -2,7 +2,7 @@ import { ApolloServer } from 'apollo-server';
 import { GraphQLSchema, GraphQLObjectType, GraphQLString } from 'graphql';
 import rootQuery from './modules/rootQuery';
 import * as mongoose from "mongoose";
-import * as dotenv from "dotenv"
+import * as dotenv from "dotenv";
 
 dotenv.config()
 
@@ -15,7 +15,7 @@ const schema = new GraphQLSchema({
   })
 })
 
-mongoose.connect("")
+mongoose.connect(process.env.MONGOOSE)
 mongoose.connection.once("open", () => {
   console.log("conneted to database")
 })
