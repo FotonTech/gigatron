@@ -11,6 +11,11 @@ const Wrapper = styled.TouchableOpacity`
   padding: 10px;
   border-radius: 23;
   background-color: ${(p: any) => p.theme.color.primary};
+  shadow-color: #000;
+  shadow-offset: {width: 1, height: 1};
+  shadow-opacity: 0.5;
+  shadow-radius: 1;
+  elevation: 1;
 `
 
 const ButtonText = styled.Text`
