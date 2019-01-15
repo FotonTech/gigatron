@@ -1,51 +1,41 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * 
- * Generated with the TypeScript template
- * https://github.com/emin93/react-native-template-typescript
- * 
- * @format
- */
+import React, { Component } from 'react';
+import { AsyncStorage, View, Linking, Platform } from 'react-native';
+import { createRootNavigator } from './navigation/Router';
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+// Styled
+import { ThemeProvider } from 'styled-components'
+import theme from './theme'
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-interface Props {}
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.tsx</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
-  }
+interface State {
+  token: string
+  isTokenRetrieved: boolean
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+export default class App extends Component<State> {
+  public state = {
+    token: '',
+    isTokenRetrieved: false
+  }
+
+  public componentDidMount() {
+    // AsyncStorage.clear()
+    AsyncStorage.getItem('userToken').then((value: any) => {
+      this.setState({
+        token: value,
+        isTokenRetrieved: true,
+      })
+    })
+  }
+
+  public render() {
+    const { isTokenRetrieved, token } = this.state
+
+    const Launch = createRootNavigator(token)
+
+    return (
+      <ThemeProvider theme={theme}>
+        {isTokenRetrieved ? <Launch /> : <View />}
+      </ThemeProvider>
+    )
+  }
+}
