@@ -5,9 +5,9 @@ import Button from '../components/Button';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag'
 
-const addUser = gql`
-  mutation addUser($input: AddUserInput!) {
-    addUser(input: $input) {
+const loginUser = gql`
+  mutation loginUser($input: LoginUserInput!) {
+    loginUser(input: $input) {
       token
       error
     }
@@ -50,26 +50,25 @@ const Title = styled.p`
 
 class Signup extends React.Component<any> {
   state = {
-    name: '',
     email: '',
     password: '',
   }
 
   handleSignUp = () => {
-    const { name, email, password } = this.state;
+    const { email, password } = this.state;
     const { mutate, history } = this.props;
 
     mutate({
       variables: {
         input: {
-          name, email, password
+          email, password
         }
       },
     })
     .then(async ({ data }: any) => {
-      const { addUser } = data;
-      if(addUser.token) {
-        await localStorage.setItem('token', addUser.token);
+      const { loginUser } = data;
+      if(loginUser.token) {
+        await localStorage.setItem('token', loginUser.token);
         return history.push('/users');
       }
     })
@@ -82,14 +81,13 @@ class Signup extends React.Component<any> {
     return (
       <Wrapper>
         <Card>
-          <Title>Sign up</Title>
+          <Title>Sign in</Title>
           <FormWrapper>
-            <Input placeholder="Name" onChange={(e: any) => this.setState({ name: e.target.value })} />
             <Input placeholder="Email" onChange={(e: any) => this.setState({ email: e.target.value })} />
             <Input placeholder="password" onChange={(e: any) => this.setState({ password: e.target.value })} />
           </FormWrapper>
-          <Button text="Signup" onClick={this.handleSignUp}/>
-          <Button text="Signin?" onClick={() => this.props.history.push('/signin')}/>
+          <Button text="Signin" onClick={this.handleSignUp}/>
+          <Button text="Signup?" onClick={() => this.props.history.push('/signup')}/>
         </Card>
       </Wrapper>
     )
@@ -97,4 +95,4 @@ class Signup extends React.Component<any> {
 }
 
 // @ts-ignore
-export default graphql(addUser)(Signup)
+export default graphql(loginUser)(Signup)

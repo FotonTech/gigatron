@@ -34,6 +34,14 @@ const Card = styled.div`
   margin: 40px;
   border-radius: 20px;
 `
+
+const Text = styled.p`
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0;
+`
+
 interface data {
   name: string
   email: string
@@ -45,6 +53,11 @@ class Users extends React.Component<any> {
     size: 10,
     page: 0,
   }
+  handleLogout = async () => {
+    const { history } = this.props;
+    await localStorage.removeItem('token');
+    await history.push('/signin');
+  }
 
   render() {
     const { data } = this.props;
@@ -53,6 +66,7 @@ class Users extends React.Component<any> {
     }
     return (
       <Wrapper>
+        <Text onClick={this.handleLogout}>Logout</Text>
         <Card>
           {data && data.users && data.users.edges.map((user: data, index: Number) =>
             <UserItem key={`UserItem_${index}`} first={index === 0} name={user.name} email={user.email} />
