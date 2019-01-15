@@ -20,10 +20,6 @@ const defaultNavigationOptions = {
       backgroundColor: theme.color.primary,
     },
     headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontFamily: 'Poppins-Regular',
-      fontWeight: '500',
-    },
   },
 }
 
