@@ -32,6 +32,8 @@ mongoose.connection.once("open", () => {
 
 const server = new ApolloServer({
   schema,
+  introspection: true,
+  playground: true,
   context: async ({ req, connection }) => {
     if (connection) {
       return {
