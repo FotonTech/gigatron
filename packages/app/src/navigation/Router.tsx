@@ -4,6 +4,11 @@ import {
   createStackNavigator,
   createSwitchNavigator,
 } from 'react-navigation'
+import theme from '../theme';
+import { ROUTENAMES } from './RouteName';
+import Signin from '../scenes/Signin';
+import Home from '../scenes/Home';
+import Signup from '../scenes/Signup';
 
 const defaultNavigationOptions = {
   defaultNavigationOptions: {
@@ -12,7 +17,7 @@ const defaultNavigationOptions = {
       elevation: 0,
       shadowOpacity: 0,
       borderBottomWidth: 0,
-      backgroundColor: theme.color.headerBackground,
+      backgroundColor: theme.color.primary,
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
@@ -24,15 +29,15 @@ const defaultNavigationOptions = {
 
 const NonLoggedAppRouter = createStackNavigator(
   {
-    // [ROUTENAMES.LOGIN]: { screen: Login },
-    // [ROUTENAMES.SIGNUP]: { screen: SignUp },
+    [ROUTENAMES.SIGNIN]: { screen: Signin },
+    [ROUTENAMES.SIGNUP]: { screen: Signup },
   },
   defaultNavigationOptions
 )
 
 const LoggedAppRouter = createStackNavigator(
   {
-    // [ROUTENAMES.HOME]: { screen: Home },
+    [ROUTENAMES.HOME]: { screen: Home },
   },
   defaultNavigationOptions
 )
