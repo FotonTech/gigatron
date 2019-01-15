@@ -30,6 +30,7 @@ interface Props {
 
 const Input = ({
   value,
+  keyboardType,
   placeholder,
   onChange,
   ...rest
@@ -37,8 +38,9 @@ const Input = ({
   return (
     <Wrapper>
       <StyledInput
+        placeholder={placeholder}
+        keyboardType={keyboardType}
         onChangeText={(val: string) => onChange(val)}
-        value={value}
         autoCapitalize="none"
         {...rest}
       />
