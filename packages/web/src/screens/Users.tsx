@@ -36,6 +36,7 @@ const Card = styled.div`
   width: 800px;
   margin: 40px;
   border-radius: 20px;
+  overflow: hidden;
 `
 
 const Text = styled.p`
@@ -90,7 +91,7 @@ class Users extends React.Component<any> {
             <UserItem key={`UserItem_${index}`} first={index === 0} name={user.name} email={user.email} />
           )}
         </Card>
-        <Button text="Load more" onClick={this.handleLoadMore} />
+        {data && data.users && data.users.hasNextPage && <Button text="Load more" onClick={this.handleLoadMore} />}
       </Wrapper>
     )
   }
