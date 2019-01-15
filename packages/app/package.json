@@ -9,6 +9,7 @@
   "dependencies": {
     "react": "16.6.3",
     "react-native": "0.57.8",
+    "react-native-linear-gradient": "^2.5.3",
     "react-navigation": "^3.0.9",
     "styled-components": "^4.1.3"
   },
