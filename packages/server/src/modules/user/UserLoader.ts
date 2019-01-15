@@ -21,3 +21,10 @@ export const Users = async (object, args, ctx) => {
 }
 
 export const User = (object, args, ctx) => UserModel.findOne({ id: args.id })
+
+export const AddUser = async (object, args, ctx) => {
+  console.log('args', args);
+  const user = new UserModel({ ...args.input })
+  await user.save();
+  return user;
+}

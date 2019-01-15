@@ -2,9 +2,9 @@ import UserType from './UserType';
 import * as Loader from './UserLoader';
 import createConnection from '../utils/createCoonnection';
 
-import { GraphQLNonNull, GraphQLID, GraphQLInt } from 'graphql';
+import { GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString, GraphQLInputObjectType } from 'graphql';
 
-export default {
+export const queries = {
   users: {
     type: createConnection(UserType, 'UserConnection'),
     args: {
@@ -25,5 +25,30 @@ export default {
       },
     },
     resolve: Loader.User
+  }
+}
+
+export const mutations = {
+  addUser: {
+    type: UserType,
+    args: {
+      input: {
+        type: new GraphQLInputObjectType({
+          name: 'AddUserInput',
+          fields: () => ({
+            name: {
+              type: (GraphQLString)
+            },
+            email: {
+              type: (GraphQLString)
+            },
+            password: {
+              type: (GraphQLString)
+            },
+          }),
+        })
+      }
+    },
+    resolve: Loader.AddUser
   }
 }

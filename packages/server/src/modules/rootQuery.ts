@@ -1,5 +1,5 @@
-import User from './user';
+import * as User from './user';
 
 export default {
-  ...User
+  ...User.queries
 }

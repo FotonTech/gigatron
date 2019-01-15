@@ -1,6 +1,7 @@
 import { ApolloServer } from 'apollo-server';
 import { GraphQLSchema, GraphQLObjectType, GraphQLString } from 'graphql';
 import rootQuery from './modules/rootQuery';
+import rootMutation from './modules/rootMutation';
 import * as mongoose from "mongoose";
 import * as dotenv from "dotenv";
 
@@ -11,6 +12,13 @@ const schema = new GraphQLSchema({
     name: 'RootQueryType',
     fields: {
       ...rootQuery
+    }
+  }),
+  mutation: new GraphQLObjectType({
+    name: 'RootMutationType',
+    // @ts-ignore
+    fields: {
+      ...rootMutation
     }
   })
 })
