@@ -5,6 +5,10 @@ import createConnection from '../utils/createCoonnection';
 import { GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString, GraphQLInputObjectType } from 'graphql';
 
 export const queries = {
+  me: {
+    type: UserType,
+    resolve: (object, args, ctx) => ctx.me
+  },
   users: {
     type: createConnection(UserType, 'UserConnection'),
     args: {

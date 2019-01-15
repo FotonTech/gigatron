@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import UserItem from '../components/UserItem';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag'
+import Button from '../components/Button';
 
 const users = gql`
   query users($size: Int!, $page: Int!) {
@@ -13,13 +14,15 @@ const users = gql`
       }
       hasNextPage
     }
+    me {
+      name
+    }
   }
 `
 
 const Wrapper = styled.div`
   display: flex;
   flex: 1;
-  height: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -59,8 +62,23 @@ class Users extends React.Component<any> {
     await history.push('/signin');
   }
 
+  handleLoadMore = () => {
+    const { data } = this.props;
+    data.fetchMore({
+      variables: { size: data.users.edges.length + 10 },
+      updateQuery: (previousResult: any, { fetchMoreResult }: any) => {
+
+        return {
+          ...previousResult,
+          users: fetchMoreResult.users,
+        };
+      },
+    });
+  }
+
   render() {
     const { data } = this.props;
+    console.log('this.props', this.props);
     if(data.loading) {
       return null;
     }
@@ -72,6 +90,7 @@ class Users extends React.Component<any> {
             <UserItem key={`UserItem_${index}`} first={index === 0} name={user.name} email={user.email} />
           )}
         </Card>
+        <Button text="Load more" onClick={this.handleLoadMore} />
       </Wrapper>
     )
   }

@@ -4,21 +4,41 @@ import Users from './screens/Users'
 import Signup from './screens/Signup'
 import Signin from './screens/Signin'
 import styled from 'styled-components';
-import ApolloClient, { InMemoryCache  } from 'apollo-boost';
+import { InMemoryCache  } from 'apollo-boost';
+import ApolloClient from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
+import { setContext } from 'apollo-link-context'
+import { createHttpLink } from 'apollo-link-http'
 
-export const client = new ApolloClient({
-  uri: "http://localhost:5000/",
-  cache: new InMemoryCache()
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:5000/graphql',
+});
+
+const authLink = setContext(async (_, { headers }) => {
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      Authorization: await localStorage.getItem('token'),
+    },
+  }
 })
+
+const client = new ApolloClient({
+  // @ts-ignore
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+})
+
 
 const Wrapper = styled.div`
   display: flex;
   flex: 1;
-  height: 100vh;
+  min-height: 100vh;
   flex-direction: column;
   background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
-`;
+`
 
 class App extends Component {
   render() {
