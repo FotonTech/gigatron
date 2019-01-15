@@ -18,7 +18,7 @@ export default class App extends Component<State> {
   }
 
   public componentDidMount() {
-    // AsyncStorage.clear()
+    AsyncStorage.clear()
     AsyncStorage.getItem('userToken').then((value: any) => {
       this.setState({
         token: value,
