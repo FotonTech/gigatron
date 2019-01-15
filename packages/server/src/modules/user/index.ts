@@ -50,5 +50,24 @@ export const mutations = {
       }
     },
     resolve: Loader.AddUser
+  },
+  loginUser: {
+    type: UserType,
+    args: {
+      input: {
+        type: new GraphQLInputObjectType({
+          name: 'LoginUserInput',
+          fields: () => ({
+            email: {
+              type: (GraphQLString)
+            },
+            password: {
+              type: (GraphQLString)
+            },
+          }),
+        })
+      }
+    },
+    resolve: Loader.LoginUser
   }
 }

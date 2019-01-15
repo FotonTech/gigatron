@@ -1,9 +1,12 @@
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer, PubSub } from 'apollo-server';
 import { GraphQLSchema, GraphQLObjectType, GraphQLString } from 'graphql';
 import rootQuery from './modules/rootQuery';
 import rootMutation from './modules/rootMutation';
 import * as mongoose from "mongoose";
 import * as dotenv from "dotenv";
+import { getUser } from './utils/auth/authMethods';
+
+const pubsub = new PubSub()
 
 dotenv.config()
 
@@ -16,7 +19,6 @@ const schema = new GraphQLSchema({
   }),
   mutation: new GraphQLObjectType({
     name: 'RootMutationType',
-    // @ts-ignore
     fields: {
       ...rootMutation
     }
@@ -28,12 +30,26 @@ mongoose.connection.once("open", () => {
   console.log("conneted to database")
 })
 
-const server = new ApolloServer({ schema });
-const port = normalizePort(process.env.PORT || '4000')
+const server = new ApolloServer({
+  schema,
+  context: async ({ req, connection }) => {
+    if (connection) {
+      return {
+        ...connection.context,
+        pubsub,
+      }
+    } else {
+      // check from req
+      const token = req.headers.authorization ? req.headers.authorization : ''
+      const me = await getUser(token)
+      return {
+        me,
+        pubsub,
+      }
+    }
+  },
+});
 
-server.listen(port).then(({ url }) => {
-  console.log(`Server ready at ${url}`)
-})
 
 function normalizePort(val) {
   const port = parseInt(val, 10)
@@ -48,3 +64,8 @@ function normalizePort(val) {
 
   return false
 }
+const port = normalizePort(process.env.PORT || '4000')
+
+server.listen(port).then(({ url }) => {
+  console.log(`Server ready at ${url}`)
+})

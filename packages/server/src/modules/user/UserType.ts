@@ -18,6 +18,14 @@ const UserType = new GraphQLObjectType({
     hasNextPage: {
       type: GraphQLBoolean,
       resolve: (o) => o.hasNextPage
+    },
+    token: {
+      type: GraphQLString,
+      resolve: (o) => o.token
+    },
+    error: {
+      type: GraphQLString,
+      resolve: (o) => o.error
     }
   }
 })
