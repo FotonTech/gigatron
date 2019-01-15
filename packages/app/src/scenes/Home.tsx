@@ -14,7 +14,7 @@ class Home extends React.Component<Props> {
   public render() {
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>Home</Text>
       </View>
     )
