@@ -3,7 +3,7 @@ export const ROUTENAMES = {
   NON_LOGGED_APP: 'NonLoggedAppRouter',
   LOGGED_APP: 'LoggedApp',
   //Screend
-  LOGIN: 'Login',
+  SIGNIN: 'Signin',
   SIGNUP: 'SignUp',
   HOME: 'Home',
 };
