@@ -9,14 +9,15 @@ const Wrapper = styled.TouchableOpacity`
   margin-bottom: 20;
   margin-top: 20;
   padding: 10px;
-  border-width: 2px;
+  border-radius: 23;
+  background-color: ${(p: any) => p.theme.color.primary};
 `
 
 const ButtonText = styled.Text`
   align-self: center;
   text-align: center;
   font-size: ${(p: any) => p.theme.fontSize.normal};
-  color: ${(p: any) => p.theme.color.primaryText};
+  color: ${(p: any) => p.theme.color.secondaryText};
   letter-spacing: 0.5;
 `
 

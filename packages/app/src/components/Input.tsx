@@ -12,9 +12,11 @@ const Wrapper = styled.View`
 const StyledInput = styled.TextInput`
   height: 40;
   width: 80%;
+  color: ${(p: any) => p.theme.color.secondaryText};
   font-size: ${(p: any) => p.theme.fontSize.large};
   border-width: 0;
-  border-bottom-width: 2;
+  border-bottom-width: 1;
+  border-color: ${(p: any) => p.theme.color.secondaryText};
 `
 
 
