@@ -14,7 +14,7 @@
     "dotenv": "^6.2.0",
     "graphql": "^14.0.2",
     "jsonwebtoken": "^8.4.0",
-    "mongoose": "^5.4.3",
+    "mongoose": "^5.4.4",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.2"
   },
