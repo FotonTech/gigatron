@@ -25,6 +25,7 @@ const schema = new GraphQLSchema({
   })
 })
 
+console.log('*************process.env.MONGOURL*************', process.env.MONGOURL);
 mongoose.connect(process.env.MONGOURL || '')
 mongoose.connection.once("open", () => {
   console.log("connected to database")
