@@ -12,7 +12,7 @@ import { createHttpLink } from 'apollo-link-http'
 
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5000/graphql',
+  uri: 'https://gigatron.now.sh/graphql',
 });
 
 const authLink = setContext(async (_, { headers }) => {
