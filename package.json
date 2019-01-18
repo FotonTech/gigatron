@@ -4,6 +4,15 @@
   "workspaces": [
     "packages/*"
   ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native-*"
+    ]
+  },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/node": "^7.2.2",
