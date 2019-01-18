@@ -17,6 +17,9 @@ export const connectToMongo = async () => {
   if (!GLOBAL_CONN) {
     if (!MONGOURL) throw new Error('[mongo.ts] No URL provided.')
     GLOBAL_CONN = await mongoose.createConnection(MONGOURL, OPTS);
+    console.info('[mongo] New connection created.')
+  } else {
+    console.info('[mongo] Connection was reused.')
   }
 
   mongoose.connection.on('error', e => {
