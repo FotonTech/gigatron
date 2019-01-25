@@ -2,13 +2,15 @@ import { ApolloServer, PubSub } from 'apollo-server';
 import { GraphQLSchema, GraphQLObjectType, GraphQLString } from 'graphql';
 import rootQuery from './modules/rootQuery';
 import rootMutation from './modules/rootMutation';
-import mongoose from "mongoose";
-import * as dotenv from "dotenv";
+import { connectToMongo } from './utils/db/mongo';
+import * as dotenv from 'dotenv';
 import { getUser } from './utils/auth/authMethods';
 
 const pubsub = new PubSub()
 
 dotenv.config()
+
+connectToMongo()
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -24,28 +26,6 @@ const schema = new GraphQLSchema({
     }
   })
 })
-
-const mongoUri = process.env.MONGOURL;
-
-const opts = {
-  auto_reconnect: true,
-  reconnectTries: Number.MAX_VALUE,
-  reconnectInterval: 1000,
-}
-
-mongoose.connect(mongoUri || '', opts);
-
-mongoose.connection.on('error', e => {
-  if (e.message.code === 'ETIMEDOUT') {
-    console.log(e);
-    mongoose.connect(mongoUri || '', opts);
-  }
-  console.log(e);
-});
-
-mongoose.connection.once('open', () => {
-  console.log(`MongoDB successfully connected to ${mongoUri}`);
-});
 
 const server = new ApolloServer({
   schema,
