@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
+import * as dotenv from 'dotenv';
+
 mongoose.Promise = global.Promise;
+dotenv.config()
 
 let GLOBAL_CONN;
 const { MONGOURL } = process.env;
@@ -16,7 +19,7 @@ const OPTS = {
 export const connectToMongo = async () => {
   if (!GLOBAL_CONN) {
     if (!MONGOURL) throw new Error('[mongo.ts] No URL provided.')
-    GLOBAL_CONN = await mongoose.createConnection(MONGOURL, OPTS);
+    GLOBAL_CONN = await mongoose.connect(MONGOURL, OPTS);
     console.info('[mongo] New connection created.')
   } else {
     console.info('[mongo] Connection was reused.')
