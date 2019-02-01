@@ -1,14 +1,11 @@
 {
-  "name": "root",
+  "name": "gigatron",
   "private": true,
   "workspaces": {
     "packages": [
       "packages/*"
     ],
-    "nohoist": [
-      "**/react-native",
-      "**/react-native-*"
-    ]
+    "nohoist": ["**/react-native", "**/react-native/**"]
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -17,14 +14,14 @@
     "@types/styled-components": "^4.1.5",
     "all-contributors-cli": "^5.7.0",
     "babel-preset-gigatron": "0.0.1",
-    "lerna": "^3.8.5",
     "typescript": "^3.2.2"
   },
   "scripts": {
-    "start": "lerna run start",
-    "start:server": "lerna run start --scope @foton/server --stream",
-    "start:web": "lerna run start --scope @foton/web --stream",
-    "start:app": "lerna run start --scope @foton/app --stream"
+    "dev:server": "yarn workspace @foton/server start",
+    "dev:web": "yarn workspace @foton/web start",
+    "dev:app": "yarn workspace @foton/app start",
+    "ios": "yarn workspace @foton/app ios",
+    "xcode": "yarn workspace @foton/app xcode"
   },
   "dependencies": {
     "graphql": "^14.0.2"
