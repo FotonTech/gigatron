@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { Fragment, Component } from "react";
 import { ApolloProvider } from "react-apollo";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import Users from "./screens/Users";
@@ -8,6 +8,9 @@ import SignUp from "./screens/SignUp";
 import SignIn from "./screens/SignIn";
 
 import client from "./graphql/client";
+import reset from "./styles/constants/reset";
+
+const GlobalStyle = createGlobalStyle`${reset}`;
 
 const Wrapper = styled.div`
     display: flex;
@@ -20,29 +23,32 @@ const Wrapper = styled.div`
 class App extends Component {
     render() {
         return (
-            <Wrapper>
-                <ApolloProvider client={client}>
-                    <BrowserRouter>
-                        <Switch>
-                            <PrivateRoute
-                                exact
-                                path="/users"
-                                component={Users}
-                            />
-                            <PublicRoute
-                                exact
-                                path="/SignUp"
-                                component={SignUp}
-                            />
-                            <PublicRoute
-                                exact
-                                path="/SignIn"
-                                component={SignIn}
-                            />
-                        </Switch>
-                    </BrowserRouter>
-                </ApolloProvider>
-            </Wrapper>
+            <Fragment>
+                <Wrapper>
+                    <ApolloProvider client={client}>
+                        <BrowserRouter>
+                            <Switch>
+                                <PrivateRoute
+                                    exact
+                                    path="/users"
+                                    component={Users}
+                                />
+                                <PublicRoute
+                                    exact
+                                    path="/SignUp"
+                                    component={SignUp}
+                                />
+                                <PublicRoute
+                                    exact
+                                    path="/SignIn"
+                                    component={SignIn}
+                                />
+                            </Switch>
+                        </BrowserRouter>
+                    </ApolloProvider>
+                </Wrapper>
+                <GlobalStyle />
+            </Fragment>
         );
     }
 }

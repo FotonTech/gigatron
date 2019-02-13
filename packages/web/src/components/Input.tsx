@@ -7,6 +7,7 @@ const Input = styled.input`
     border-width: 0;
     color: white;
     text-align: center;
+    font-family: "Inter Medium";
     font-weight: 700;
     ::placeholder {
         color: white;
