@@ -1,7 +1,10 @@
-import React, { Fragment, Component } from "react";
+import React, { Fragment } from "react";
 import { ApolloProvider } from "react-apollo";
 import styled, { createGlobalStyle } from "styled-components";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
+
+import PrivateRoute from "./routes/Private";
+import PublicRoute from "./routes/Public";
 
 import Users from "./screens/Users";
 import SignUp from "./screens/SignUp";
@@ -20,79 +23,21 @@ const Wrapper = styled.div`
     background: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%);
 `;
 
-class App extends Component {
-    render() {
-        return (
-            <Fragment>
-                <Wrapper>
-                    <ApolloProvider client={client}>
-                        <BrowserRouter>
-                            <Switch>
-                                <PrivateRoute
-                                    exact
-                                    path="/users"
-                                    component={Users}
-                                />
-                                <PublicRoute
-                                    exact
-                                    path="/SignUp"
-                                    component={SignUp}
-                                />
-                                <PublicRoute
-                                    exact
-                                    path="/SignIn"
-                                    component={SignIn}
-                                />
-                            </Switch>
-                        </BrowserRouter>
-                    </ApolloProvider>
-                </Wrapper>
-                <GlobalStyle />
-            </Fragment>
-        );
-    }
-}
-
-//@ts-ignore
-function PublicRoute({ component: Component, ...rest }) {
-    return (
-        <Route
-            {...rest}
-            render={props =>
-                !localStorage.getItem("token") ? (
-                    <Component {...props} />
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: "/users",
-                            state: { from: props.location }
-                        }}
-                    />
-                )
-            }
-        />
-    );
-}
-
-//@ts-ignore
-function PrivateRoute({ component: Component, ...rest }) {
-    return (
-        <Route
-            {...rest}
-            render={props =>
-                localStorage.getItem("token") ? (
-                    <Component {...props} />
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: "/signin",
-                            state: { from: props.location }
-                        }}
-                    />
-                )
-            }
-        />
-    );
-}
+const App = () => (
+    <Fragment>
+        <Wrapper>
+            <ApolloProvider client={client}>
+                <BrowserRouter>
+                    <Switch>
+                        <PrivateRoute exact path="/users" component={Users} />
+                        <PublicRoute exact path="/signup" component={SignUp} />
+                        <PublicRoute exact path="/signin" component={SignIn} />
+                    </Switch>
+                </BrowserRouter>
+            </ApolloProvider>
+        </Wrapper>
+        <GlobalStyle />
+    </Fragment>
+);
 
 export default App;
