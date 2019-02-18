@@ -163,6 +163,7 @@ const reset = css`
       src: url("/fonts/Inter-ExtraBold.woff2") format("woff2"),
            url("/fonts/Inter-ExtraBold.woff") format("woff");
     }
+
     @font-face {
       font-family: 'Inter';
       font-style:  italic;
@@ -196,7 +197,6 @@ const reset = css`
            url("/fonts/Inter-upright.var.woff2") format("woff2-variations"),
            url("/fonts/Inter-upright.var.woff2") format("woff2");
     }
-    
     @font-face {
       font-family: 'Inter var';
       font-weight: 100 900;
@@ -207,20 +207,6 @@ const reset = css`
            url("/fonts/Inter-italic.var.woff2") format("woff2");
     }
     
-    
-    /* --------------------------------------------------------------------------
-    [EXPERIMENTAL] Multi-axis, single variable font.
-    
-    Slant axis is not yet widely supported (as of February 2019) and thus this
-    multi-axis single variable font is opt-in rather than the default.
-    
-    When using this, you will probably need to set font-variation-settings
-    explicitly, e.g.
-    
-      * { font-variation-settings: "slnt" 0deg }
-      .italic { font-variation-settings: "slnt" 10deg }
-    
-    */
     @font-face {
       font-family: 'Inter var experimental';
       font-weight: 100 900;
