@@ -3,13 +3,12 @@ import { ApolloProvider } from "react-apollo";
 import styled, { createGlobalStyle } from "styled-components";
 import { BrowserRouter, Switch } from "react-router-dom";
 
+import Login from "./components/Login/Login";
+import Users from "./screens/Users";
+import UsersTest from "./components/Users/Users";
+
 import PrivateRoute from "./routes/Private";
 import PublicRoute from "./routes/Public";
-
-import Users from "./screens/Users";
-import SignUp from "./screens/SignUp";
-import SignIn from "./screens/SignIn";
-import Login from "./components/Login/Login";
 
 import client from "./graphql/client";
 import reset from "./styles/constants/reset";
@@ -30,13 +29,16 @@ const App = () => (
             <ApolloProvider client={client}>
                 <BrowserRouter>
                     <Switch>
-                        <PrivateRoute exact path="/users" component={Users} />
                         <PublicRoute exact path="/" component={Login} />
                         <PublicRoute exact path="/signin" component={Login} />
                         <PublicRoute exact path="/signup" component={Login} />
                         <PublicRoute exact path="/forgot" component={Login} />
-                        {/* <PublicRoute exact path="/signup" component={SignUp} />
-                        <PublicRoute exact path="/signin" component={SignIn} /> */}
+                        <PrivateRoute exact path="/users" component={Users} />
+                        <PrivateRoute
+                            exact
+                            path="/userstest"
+                            component={UsersTest}
+                        />
                     </Switch>
                 </BrowserRouter>
             </ApolloProvider>
