@@ -117,7 +117,6 @@ const SignUp = withFormik<MyFormProps, FormValues>({
             .email("Email not valid")
             .required("Email is required"),
         password: Yup.string()
-            .min(8, "Password must be at least 8 characters")
             .required("Password is required")
     }),
 

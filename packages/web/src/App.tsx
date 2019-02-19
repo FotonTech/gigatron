@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { ApolloProvider } from "react-apollo";
+import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
 import styled, { createGlobalStyle } from "styled-components";
 import { BrowserRouter, Switch } from "react-router-dom";
 
@@ -27,20 +28,38 @@ const App = () => (
     <Fragment>
         <Wrapper>
             <ApolloProvider client={client}>
-                <BrowserRouter>
-                    <Switch>
-                        <PublicRoute exact path="/" component={Login} />
-                        <PublicRoute exact path="/signin" component={Login} />
-                        <PublicRoute exact path="/signup" component={Login} />
-                        <PublicRoute exact path="/forgot" component={Login} />
-                        <PrivateRoute exact path="/users" component={Users} />
-                        <PrivateRoute
-                            exact
-                            path="/test"
-                            component={UsersTest}
-                        />
-                    </Switch>
-                </BrowserRouter>
+                <ApolloHooksProvider client={client}>
+                    <BrowserRouter>
+                        <Switch>
+                            <PublicRoute exact path="/" component={Login} />
+                            <PublicRoute
+                                exact
+                                path="/signin"
+                                component={Login}
+                            />
+                            <PublicRoute
+                                exact
+                                path="/signup"
+                                component={Login}
+                            />
+                            <PublicRoute
+                                exact
+                                path="/forgot"
+                                component={Login}
+                            />
+                            <PrivateRoute
+                                exact
+                                path="/users"
+                                component={Users}
+                            />
+                            <PrivateRoute
+                                exact
+                                path="/test"
+                                component={UsersTest}
+                            />
+                        </Switch>
+                    </BrowserRouter>
+                </ApolloHooksProvider>
             </ApolloProvider>
         </Wrapper>
         <GlobalStyle />

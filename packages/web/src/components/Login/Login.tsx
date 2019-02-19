@@ -30,7 +30,7 @@ const Login = () => (
             </Logo>
             <Text>
                 <h3>
-                    Welcome to Gigatron. Please sign up if you dont already have
+                    Welcome to Gigatron. Please sign up if you don't already have
                     an account.
                 </h3>
             </Text>
