@@ -20,11 +20,17 @@ const Login = () => (
     <Fragment>
         <StyledLogin>
             <Logo>
-                <Title>Gigatron</Title>
+                <Title
+                    fontSize={2.5}
+                    fontWeight={600}
+                    textTransform="uppercase"
+                >
+                    Gigatron
+                </Title>
             </Logo>
             <Text>
                 <h3>
-                    Welcome to Xgruve. Please sign up if you dont already have
+                    Welcome to Gigatron. Please sign up if you dont already have
                     an account.
                 </h3>
             </Text>
