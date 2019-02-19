@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { graphql } from "react-apollo";
 import * as Yup from "yup";
 import { withFormik, FormikProps } from "formik";
 
@@ -9,10 +10,12 @@ import Input from "../../../styles/components/UI/Input/Input";
 import Button from "../../../styles/components/UI/Button/Button";
 import Error from "../../../styles/components/UI/Error/Error";
 
+import { addUser } from "../../../graphql/mutations";
+
 interface FormValues {
     email: string;
     password: string;
-    passwordConfirmation: string;
+    name: string;
 }
 
 interface OtherProps {
@@ -24,7 +27,9 @@ interface OtherProps {
 interface MyFormProps {
     initialEmail?: string;
     initialPassword?: string;
-    initialPasswordConfirmation?: string;
+    initialName?: string;
+    mutate?: any;
+    history?: any;
 }
 
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
@@ -40,6 +45,20 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 
     return (
         <Form onSubmit={handleSubmit} gridRow="3 / 6">
+            <Label>Name</Label>
+            <Input
+                type="text"
+                name="name"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.name}
+            />
+            {touched.name && errors.name && (
+                <Error>
+                    <h2>{errors.name}</h2>
+                </Error>
+            )}
+
             <Label>Email address</Label>
             <Input
                 type="email"
@@ -53,6 +72,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     <h2>{errors.email}</h2>
                 </Error>
             )}
+
             <Label>Password</Label>
             <Input
                 type="password"
@@ -66,19 +86,6 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     <h2>{errors.password}</h2>
                 </Error>
             )}
-            <Label>Confirm password</Label>
-            <Input
-                type="password"
-                name="passwordConfirmation"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.passwordConfirmation}
-            />
-            {touched.passwordConfirmation && errors.passwordConfirmation && (
-                <Error>
-                    <h2>{errors.passwordConfirmation}</h2>
-                </Error>
-            )}
             <Button
                 fontSize={1}
                 color="FFFFFF"
@@ -86,11 +93,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 disabled={
                     isSubmitting ||
                     !!(errors.email && touched.email) ||
-                    !!(errors.password && touched.password) ||
-                    !!(
-                        errors.passwordConfirmation &&
-                        touched.passwordConfirmation
-                    )
+                    !!(errors.password && touched.password)
                 }
             >
                 Create account
@@ -104,9 +107,9 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 const SignUp = withFormik<MyFormProps, FormValues>({
     // Transform outer props into form values
     mapPropsToValues: props => ({
+        name: props.initialName || "",
         email: props.initialEmail || "",
-        password: props.initialPassword || "",
-        passwordConfirmation: props.initialPasswordConfirmation || ""
+        password: props.initialPassword || ""
     }),
 
     validationSchema: Yup.object().shape({
@@ -115,18 +118,37 @@ const SignUp = withFormik<MyFormProps, FormValues>({
             .required("Email is required"),
         password: Yup.string()
             .min(8, "Password must be at least 8 characters")
-            .required("Password is required"),
-        passwordConfirmation: Yup.string()
-            .oneOf([Yup.ref("password"), null], "Passwords are not the same!")
-            .required("Password confirmation is required!")
+            .required("Password is required")
     }),
 
     handleSubmit(
-        { email, password, passwordConfirmation }: FormValues,
+        { name, email, password }: FormValues,
         { props, setSubmitting, setErrors }
     ) {
-        console.log(email, password, passwordConfirmation);
+        props
+            .mutate({
+                variables: {
+                    input: {
+                        name,
+                        email,
+                        password
+                    }
+                }
+            })
+            .then(({ data }: any) => {
+                const { addUser } = data;
+
+                if (addUser.token) {
+                    localStorage.setItem("token", addUser.token);
+                }
+            })
+            .then(() => props.history.push("/users"))
+            .catch((error: string) => {
+                console.log("error", error);
+                setSubmitting(false);
+                setErrors({ email: "", password: "" });
+            });
     }
 })(InnerForm);
 
-export default SignUp;
+export default graphql(addUser)(SignUp);

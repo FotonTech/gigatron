@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { graphql } from "react-apollo";
 import * as Yup from "yup";
 import { withFormik, FormikProps } from "formik";
 
@@ -8,6 +9,8 @@ import Label from "../../../styles/components/UI/Label/Label";
 import Input from "../../../styles/components/UI/Input/Input";
 import Button from "../../../styles/components/UI/Button/Button";
 import Error from "../../../styles/components/UI/Error/Error";
+
+import { loginUser } from "../../../graphql/mutations";
 
 interface FormValues {
     email: string;
@@ -23,6 +26,8 @@ interface OtherProps {
 interface MyFormProps {
     initialEmail?: string;
     initialPassword?: string;
+    mutate?: any;
+    history?: any;
 }
 
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
@@ -94,17 +99,29 @@ const SignIn = withFormik<MyFormProps, FormValues>({
         email: Yup.string()
             .email("Email not valid")
             .required("Email is required"),
-        password: Yup.string()
-            .min(8, "Password must be at least 8 characters")
-            .required("Password is required")
+        password: Yup.string().required("Password is required")
     }),
 
     handleSubmit(
         { email, password }: FormValues,
         { props, setSubmitting, setErrors }
     ) {
-        console.log(email, password);
+        props
+            .mutate({ variables: { input: { email, password } } })
+            .then(({ data }: any) => {
+                const { loginUser } = data;
+
+                if (loginUser.token) {
+                    localStorage.setItem("token", loginUser.token);
+                }
+            })
+            .then(() => props.history.push("/users"))
+            .catch((error: string) => {
+                console.log("error", error);
+                setSubmitting(false);
+                setErrors({ email: "", password: "" });
+            });
     }
 })(InnerForm);
 
-export default SignIn;
+export default graphql(loginUser)(SignIn);

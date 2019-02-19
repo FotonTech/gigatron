@@ -6,7 +6,7 @@ import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
 import ForgotPassword from "./ForgotPassword/ForgotPassword";
 
-import Title from '../../styles/components/UI/Title/Title';
+import Title from "../../styles/components/UI/Title/Title";
 
 import StyledLogin from "../../styles/components/Login/Login";
 import Text from "../../styles/components/Login/Text/Text";
