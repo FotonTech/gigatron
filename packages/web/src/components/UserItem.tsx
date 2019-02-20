@@ -76,7 +76,7 @@ interface UserItemProps {
     first?: boolean;
 }
 
-export default ({ name, email, first }: UserItemProps) => (
+const UserItem = ({ name, email, first }: UserItemProps) => (
     <Wrapper first={first}>
         <LeftWrapper>
             <InitialsBubble>
@@ -89,3 +89,5 @@ export default ({ name, email, first }: UserItemProps) => (
         </RightWrapper>
     </Wrapper>
 );
+
+export default UserItem;
