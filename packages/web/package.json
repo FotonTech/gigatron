@@ -3,11 +3,6 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "@types/jest": "23.3.12",
-        "@types/node": "10.12.18",
-        "@types/react": "16.7.18",
-        "@types/react-dom": "16.0.11",
-        "@types/yup": "^0.26.9",
         "add": "^2.0.6",
         "apollo-cache-inmemory": "^1.4.3",
         "apollo-client": "^2.4.13",
@@ -49,6 +44,12 @@
         "not op_mini all"
     ],
     "devDependencies": {
-        "@types/react-router-dom": "^4.3.1"
+        "@types/jest": "^24.0.6",
+        "@types/node": "^11.9.4",
+        "@types/react": "^16.8.4",
+        "@types/react-dom": "^16.8.2",
+        "@types/react-router-dom": "^4.3.1",
+        "@types/styled-components": "^4.1.10",
+        "@types/yup": "^0.26.9"
     }
 }
