@@ -1,5 +1,5 @@
-import * as User from './user/index';
+import * as User from "./user/index";
 
 export default {
-  ...User.mutations
-}
+    ...User.mutations
+};

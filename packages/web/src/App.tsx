@@ -1,103 +1,73 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import Users from './screens/Users'
-import Signup from './screens/Signup'
-import Signin from './screens/Signin'
-import styled from 'styled-components';
-import { InMemoryCache  } from 'apollo-boost';
-import ApolloClient from 'apollo-client';
-import { ApolloProvider } from 'react-apollo';
-import { setContext } from 'apollo-link-context'
-import { createHttpLink } from 'apollo-link-http'
+import React, { Fragment } from "react";
+import { ThemeProvider } from "styled-components";
+import { ApolloProvider } from "react-apollo";
+import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
+import styled, { createGlobalStyle } from "styled-components";
+import { BrowserRouter, Switch } from "react-router-dom";
 
+import Login from "./components/Login/Login";
+import UsersTest from "./components/Users/Users";
+import Users from "./screens/Users";
 
-const httpLink = createHttpLink({
-  uri: 'https://gigatron.now.sh/graphql',
-});
+import PrivateRoute from "./routes/Private";
+import PublicRoute from "./routes/Public";
 
-const authLink = setContext(async (_, { headers }) => {
-  // return the headers to the context so httpLink can read them
-  return {
-    headers: {
-      ...headers,
-      Authorization: await localStorage.getItem('token'),
-    },
-  }
-})
+import { theme } from "./styles/Theme/Theme";
+import client from "./graphql/client";
+import reset from "./styles/constants/reset";
 
-const client = new ApolloClient({
-  // @ts-ignore
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-})
-
+const GlobalStyle = createGlobalStyle`${reset}`;
 
 const Wrapper = styled.div`
-  display: flex;
-  flex: 1;
-  min-height: 100vh;
-  flex-direction: column;
-  background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
-`
+    display: flex;
+    flex: 1;
+    min-height: 100vh;
+    flex-direction: column;
+    background: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%);
+`;
 
-class App extends Component {
-  render() {
-    return (
-      <Wrapper>
-        <ApolloProvider client={client}>
-          <BrowserRouter>
-            <Switch>
-              <PrivateRoute exact path='/users' component={Users}/>
-              <PublicRoute exact path='/signup' component={Signup}/>
-              <PublicRoute exact path='/signin' component={Signin}/>
-            </Switch>
-          </BrowserRouter>
-        </ApolloProvider>
-      </Wrapper>
-    );
-  }
-}
-
-//@ts-ignore
-function PublicRoute({ component: Component, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        !localStorage.getItem('token') ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/users',
-              state: { from: props.location },
-            }}
-          />
-        )
-      }
-    />
-  );
-}
-
-//@ts-ignore
-function PrivateRoute({ component: Component, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        localStorage.getItem('token') ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/signin',
-              state: { from: props.location },
-            }}
-          />
-        )
-      }
-    />
-  );
-}
+const App = () => (
+    <Fragment>
+        <Wrapper>
+            <ApolloProvider client={client}>
+                <ApolloHooksProvider client={client}>
+                    <ThemeProvider theme={theme}>
+                        <BrowserRouter>
+                            <Switch>
+                                <PublicRoute exact path="/" component={Login} />
+                                <PublicRoute
+                                    exact
+                                    path="/signin"
+                                    component={Login}
+                                />
+                                <PublicRoute
+                                    exact
+                                    path="/signup"
+                                    component={Login}
+                                />
+                                <PublicRoute
+                                    exact
+                                    path="/forgot"
+                                    component={Login}
+                                />
+                                <PrivateRoute
+                                    exact
+                                    path="/users"
+                                    component={Users}
+                                />
+                                <PrivateRoute
+                                    exact
+                                    path="/test"
+                                    component={UsersTest}
+                                />
+                            </Switch>
+                        </BrowserRouter>
+                    </ThemeProvider>
+                </ApolloHooksProvider>
+            </ApolloProvider>
+        </Wrapper>
+        <GlobalStyle />
+    </Fragment>
+);
 
 export default App;
