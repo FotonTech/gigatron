@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "../../../Theme/Theme";
 
 interface FormProps {
     width?: number;
@@ -14,7 +14,8 @@ const Form = styled.form<FormProps>`
     height: ${props => props.height || 80}%;
     grid-column: ${props => props.gridColumn || ""};
     grid-row: ${props => props.gridRow || ""};
-    background-color: ${props => props.backgroundColor || "#ffffff"};
+    background-color: ${props =>
+        props.backgroundColor || props.theme.color.secondary};
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

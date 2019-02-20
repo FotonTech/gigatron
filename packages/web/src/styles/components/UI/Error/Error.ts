@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "../../../Theme/Theme";
 
 const Error = styled.div`
     width: 100%;
@@ -6,15 +6,15 @@ const Error = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(254, 0, 0, 0.2);
-    border: 1px solid #fe0000;
+    background-color: ${props => props.theme.error.bgColor};
+    border: ${props => props.theme.error.border};
     border-radius: 4px;
 
     > h2 {
-        font-family: "Inter";
+        font-family: ${props => props.theme.font.fontFamily};
         font-size: 0.8rem;
         font-weight: 400;
-        color: #fe0000;
+        color: ${props => props.theme.error.color};
     }
 `;
 

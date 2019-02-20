@@ -71,7 +71,6 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             )}
             <Button
                 fontSize={1}
-                color="FFFFFF"
                 type="submit"
                 disabled={
                     isSubmitting ||

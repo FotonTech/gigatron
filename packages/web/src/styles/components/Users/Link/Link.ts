@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "../../../Theme/Theme";
 
 interface LinkProps {
     color?: string;
@@ -8,8 +8,8 @@ interface LinkProps {
 }
 
 const LinkWrapper = styled.h1<LinkProps>`
-    color: #${props => props.color || "811CFC"};
-    font-family: "Inter";
+    color: ${props => props.color || props.theme.color.primary};
+    font-family: ${props => props.theme.font.fontFamily};
     font-size: ${props => props.fontSize || 1}rem;
     font-weight: ${props => props.fontWeight || 500};
     cursor: pointer;

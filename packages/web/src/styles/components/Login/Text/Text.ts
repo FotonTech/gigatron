@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "../../../Theme/Theme";
 
 const Text = styled.div`
     width: 100%;
@@ -12,10 +12,10 @@ const Text = styled.div`
     font-size: 0.8rem;
 
     > h3 {
-        font-family: "Inter";
+        font-family: ${props => props.theme.font.fontFamily};
         font-size: 0.8rem;
         font-weight: 500;
-        color: #811cfc;
+        color: ${props => props.theme.color.primary};
     }
 `;
 

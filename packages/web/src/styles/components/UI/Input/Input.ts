@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "../../../Theme/Theme";
 
 interface InputProps {
     width?: number;
@@ -12,12 +12,12 @@ const Input = styled.input<InputProps>`
     width: ${props => props.width || 100}%;
     max-width: ${props => props.maxWidth};
     height: ${props => props.height || 50}px;
-    background-color: rgba(246, 246, 246, 0.3);
-    border: 1px solid #d8dde6;
+    background-color: ${props => props.theme.input.bgColor};
+    border: ${props => props.theme.input.border};
     border-radius: 4px;
     text-indent: 20px;
     font-size: 14px;
-    font-family: "Inter";
+    font-family: ${props => props.theme.font.fontFamily};
     font-weight: 500;
     transition: border-color 0.2s ease, background-color 0.2s ease;
     cursor: pointer;
@@ -31,11 +31,11 @@ const Input = styled.input<InputProps>`
     }
 
     &:hover {
-        border: 1px solid #a3afc4;
+        border: ${props => props.theme.input.hoverBorder};
     }
 
     &:focus {
-        border: 1px solid #d8dde6;
+        border: ${props => props.theme.input.border};
         background-color: rgba(246, 246, 246, 0.2);
     }
 
