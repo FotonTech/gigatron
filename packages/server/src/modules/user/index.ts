@@ -1,6 +1,6 @@
 import UserType from "./UserType";
 import * as Loader from "./UserLoader";
-import createConnection from "../utils/createCoonnection";
+import createConnection from "../utils/createConnection";
 
 import {
     GraphQLNonNull,
