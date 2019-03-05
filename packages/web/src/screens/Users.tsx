@@ -4,21 +4,7 @@ import UserItem from "../components/UserItem";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import Button from "../components/Button";
-
-const users = gql`
-    query users($size: Int!, $page: Int!) {
-        users(size: $size, page: $page) {
-            edges {
-                name
-                email
-            }
-            hasNextPage
-        }
-        me {
-            name
-        }
-    }
-`;
+import { users } from '../graphql/queries';
 
 const Wrapper = styled.div`
     display: flex;
