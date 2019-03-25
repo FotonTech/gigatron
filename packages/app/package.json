@@ -17,6 +17,7 @@
     "babel-jest": "24.0.0",
     "jest": "24.0.0",
     "metro-react-native-babel-preset": "0.51.1",
+    "react-native-monorepo-helper": "^0.2.5",
     "react-test-renderer": "16.6.3"
   },
   "jest": {
