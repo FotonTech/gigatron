@@ -24,8 +24,8 @@
         "dev": "concurrently -n app,web,server --kill-others \"yarn ios\" \"yarn web\" \"yarn server\"",
         "dev:web": "concurrently -n web,server --kill-others \"yarn web\" \"yarn server\"",
         "dev:app": "concurrently -n app,server --kill-others \"yarn ios\" \"yarn server\"",
-        "ios": "yarn workspace @foton/app ios",
-        "xcode": "yarn workspace @foton/app xcode"
+        "run-ios": "yarn workspace @foton/app run-ios",
+        "ios": "yarn workspace @foton/app ios"
     },
     "dependencies": {
         "graphql": "^14.0.2"
