@@ -37,6 +37,28 @@ This boilerplate contains all you need to start your next monorepo Fullstack pro
 
 - `npm start` - start the app, server and web.
 
+## Using React Native
+
+- To add package foobar to app
+```
+cd packages/app
+yarn add foobar
+```
+
+- If you add native dependencies that don't begin with `react-native-` add them to workspaces.nohoist in the root packages.json, with the globs below:
+
+```json
+// example with foobar package
+// foobar doesn't match `react-native-` so we need to add manually to nohoist
+// react-native-foobar would be fine though!
+    "workspaces": {
+        "nohoist": [
+            "**/foobar",
+            "**/foobar/**",
+        ]
+    },
+
+```
 
 ## Next features:
 
