@@ -16,7 +16,7 @@ module.exports = {
     }),
   },
   resolver: {
-    blacklistRE: /gigatron[/]node_modules[/]react-native[/].*/
+    blacklistRE: /packages[/]app[/]node_modules[/]react-native[/].*/
   },
   watchFolders: [
     path.resolve(__dirname, '../../'),

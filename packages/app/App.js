@@ -9,7 +9,7 @@
 import React, {Component} from 'react';
 import { Platform, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
-// import OpenSettings from 'react-native-open-settings';
+import OpenSettings from 'react-native-open-settings';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -25,7 +25,7 @@ color: green;
 
 export default class App extends Component<Props> {
   handlePress = () => {
-    // OpenSettings.openSettings();
+    OpenSettings.openSettings();
   }
 
   render() {
