@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "react": "16.8.3",
-    "react-native": "0.59.3",
     "react-dom": "^16.8.6",
+    "react-native": "0.59.3",
     "react-native-open-settings": "^1.0.1",
     "styled-components": "^4.1.3"
   },

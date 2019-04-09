@@ -15,9 +15,6 @@ module.exports = {
       },
     }),
   },
-  resolver: {
-    blacklistRE: /packages[/]app[/]node_modules[/]react-native[/].*/
-  },
   watchFolders: [
     path.resolve(__dirname, '../../'),
   ],
