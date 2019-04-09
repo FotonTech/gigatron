@@ -31,11 +31,9 @@
         "dev:web": "concurrently -n web,server --kill-others \"yarn web\" \"yarn server\"",
         "dev:app": "concurrently -n app,server --kill-others \"yarn ios\" \"yarn server\"",
         "run-ios": "yarn workspace @foton/app run-ios",
-        "ios": "yarn workspace @foton/app ios",
-        "postinstall": "yarn workspace @foton/app patch-package"
+        "ios": "yarn workspace @foton/app ios"
     },
     "dependencies": {
-        "graphql": "^14.0.2",
-        "patch-package": "^6.1.1"
+        "graphql": "^14.0.2"
     }
 }
