@@ -1,0 +1,45 @@
+diff --git a/node_modules/@react-native-community/cli/build/commands/link/getDependencyConfig.js b/node_modules/@react-native-community/cli/build/commands/link/getDependencyConfig.js
+index 31d1bff..145cb8a 100644
+--- a/node_modules/@react-native-community/cli/build/commands/link/getDependencyConfig.js
++++ b/node_modules/@react-native-community/cli/build/commands/link/getDependencyConfig.js
+@@ -23,12 +23,18 @@ var _getHooks = _interopRequireDefault(require("../../tools/getHooks"));
+ 
+ var _getAssets = _interopRequireDefault(require("../../tools/getAssets"));
+ 
++var didRetry = false
++
+ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+ 
+ function getDependencyConfig(ctx, availablePlatforms, dependency) {
++  // console.log('ctx', ctx)
++  // console.log('availablePlatforms', availablePlatforms)
++  // console.log('dependency', dependency)
+   try {
+-    const folder = _path().default.join(ctx.root, 'node_modules', dependency);
+-
++    let folder = _path().default.join(ctx.root, 'node_modules', dependency);
++    // console.log('folder', folder)
++    // folder = folder.replace('packages/app/', '')
+     const config = (0, _getPackageConfiguration.default)(folder);
+     const platformConfigs = {
+       ios: undefined,
+@@ -46,6 +52,15 @@ function getDependencyConfig(ctx, availablePlatforms, dependency) {
+       params: (0, _getParams.default)(folder)
+     };
+   } catch (e) {
++    // console.log('got e', e.code)
++    if (e.code === 'MODULE_NOT_FOUND' && !didRetry) {
++      didRetry = true
++      const newctx = {
++        ...ctx,
++        root: ctx.root.replace(/[/]packages[/][^/]+/, '')
++      }
++      return getDependencyConfig(newctx, availablePlatforms, dependency)
++    }
+     throw new Error('Failed to get dependency config');
+   }
+ }
+\ No newline at end of file
+diff --git a/node_modules/@react-native-community/cli/build/commands/server/external/xsel b/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+old mode 100644
+new mode 100755

@@ -11,8 +11,6 @@
         ]
     },
     "devDependencies": {
-        "react": "16.8.3",
-        "react-native": "0.59.3",
         "@babel/cli": "^7.2.3",
         "@babel/core": "^7.4.3",
         "@babel/node": "^7.2.2",
@@ -21,6 +19,8 @@
         "all-contributors-cli": "^5.7.0",
         "babel-preset-gigatron": "0.0.1",
         "concurrently": "^4.1.0",
+        "react": "16.8.2",
+        "react-native": "0.59.3",
         "typescript": "^3.2.2"
     },
     "scripts": {
@@ -31,9 +31,11 @@
         "dev:web": "concurrently -n web,server --kill-others \"yarn web\" \"yarn server\"",
         "dev:app": "concurrently -n app,server --kill-others \"yarn ios\" \"yarn server\"",
         "run-ios": "yarn workspace @foton/app run-ios",
-        "ios": "yarn workspace @foton/app ios"
+        "ios": "yarn workspace @foton/app ios",
+        "postinstall": "yarn workspace @foton/app patch-package"
     },
     "dependencies": {
-        "graphql": "^14.0.2"
+        "graphql": "^14.0.2",
+        "patch-package": "^6.1.1"
     }
 }
