@@ -18,7 +18,6 @@
   "devDependencies": {
     "@babel/core": "7.4.3",
     "@babel/runtime": "7.4.3",
-    "@types/react": "^16.8.13",
     "@types/react-native": "^0.57.42",
     "metro-react-native-babel-preset": "^0.53.1",
     "react-native-typescript-transformer": "^1.2.12",

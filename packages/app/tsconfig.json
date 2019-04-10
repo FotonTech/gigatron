@@ -1,4 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "includes": ["src", "./*.ts"]
+  "compilerOptions": {
+    "jsx": "react-native" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
+  }
 }
