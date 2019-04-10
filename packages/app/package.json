@@ -5,8 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "run-ios": "react-native run-ios",
-    "ios": "open ios/app.xcodeproj",
-    "test": "jest"
+    "ios": "open ios/app.xcodeproj"
   },
   "dependencies": {
     "react": "16.8.3",
@@ -22,8 +21,5 @@
     "metro-react-native-babel-preset": "^0.53.1",
     "react-native-typescript-transformer": "^1.2.12",
     "react-test-renderer": "16.8.3"
-  },
-  "jest": {
-    "preset": "react-native"
   }
 }
