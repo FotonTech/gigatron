@@ -13,7 +13,7 @@ import {
 export const queries = {
   me: {
     type: UserType,
-    resolve: (object: any, args: any, ctx: any) => ctx.me,
+    resolve: (object, args, ctx) => ctx.me,
   },
   users: {
     type: createConnection(UserType, 'UserConnection'),

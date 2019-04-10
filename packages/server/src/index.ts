@@ -44,7 +44,7 @@ const server = new ApolloServer({
   },
 })
 
-function normalizePort(val: any) {
+function normalizePort(val) {
   const port = parseInt(val, 10)
 
   if (isNaN(port)) {
