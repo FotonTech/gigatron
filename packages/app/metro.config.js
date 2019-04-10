@@ -1,21 +1,11 @@
-/**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
- *
- * @format
- */
-const path = require('path');
+const path = require('path')
 
 module.exports = {
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: false,
-      },
-    }),
+  watchFolders: [path.resolve(__dirname, '../../')],
+  getTransformModulePath() {
+    return require.resolve('react-native-typescript-transformer')
   },
-  watchFolders: [
-    path.resolve(__dirname, '../../'),
-  ],
-};
+  getSourceExts() {
+    return ['ts', 'tsx']
+  },
+}
