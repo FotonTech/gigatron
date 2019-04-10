@@ -9,7 +9,12 @@
     "mongo": true
   },
   "parser": "babel-eslint",
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended",
+    "prettier/react"
+  ],
   "settings": {
     "import/resolver": {
       "node": true,
@@ -23,7 +28,7 @@
     {
       "files": ["**/*.ts", "**/*.tsx"],
       "parser": "@typescript-eslint/parser",
-      "plugins": ["@typescript-eslint/eslint-plugin"],
+      "plugins": ["react", "prettier", "@typescript-eslint/eslint-plugin"],
       "rules": {}
     }
   ],
@@ -34,5 +39,5 @@
     "prettier/prettier": "off",
     "no-restricted-globals": "warn"
   },
-  "plugins": ["react"]
+  "plugins": ["react", "prettier"]
 }
