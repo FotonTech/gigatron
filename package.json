@@ -1,39 +1,71 @@
 {
-    "name": "gigatron",
-    "private": true,
-    "workspaces": {
-        "packages": [
-            "packages/*"
-        ],
-        "nohoist": [
-            "**/react-native",
-            "**/react-native/**",
-            "**/react-native-*",
-            "**/react-native-*/**"
-        ]
-    },
-    "devDependencies": {
-        "@babel/cli": "^7.2.3",
-        "@babel/core": "^7.4.3",
-        "@babel/node": "^7.2.2",
-        "@types/graphql": "^14.0.4",
-        "@types/styled-components": "^4.1.5",
-        "all-contributors-cli": "^5.7.0",
-        "babel-preset-gigatron": "0.0.1",
-        "concurrently": "^4.1.0",
-        "typescript": "^3.2.2"
-    },
-    "scripts": {
-        "server": "yarn workspace @foton/server start",
-        "web": "yarn workspace @foton/web start",
-        "app": "yarn workspace @foton/app start",
-        "dev": "concurrently -n app,web,server --kill-others \"yarn ios\" \"yarn web\" \"yarn server\"",
-        "dev:web": "concurrently -n web,server --kill-others \"yarn web\" \"yarn server\"",
-        "dev:app": "concurrently -n app,server --kill-others \"yarn ios\" \"yarn server\"",
-        "run-ios": "yarn workspace @foton/app run-ios",
-        "ios": "yarn workspace @foton/app ios"
-    },
-    "dependencies": {
-        "graphql": "^14.0.2"
+  "name": "gigatron",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**",
+      "**/react-native-*",
+      "**/react-native-*/**"
+    ]
+  },
+  "scripts": {
+    "server": "yarn workspace @foton/server start",
+    "web": "yarn workspace @foton/web start",
+    "app": "yarn workspace @foton/app start",
+    "dev": "concurrently -n app,web,server --kill-others \"yarn ios\" \"yarn web\" \"yarn server\"",
+    "dev:web": "concurrently -n web,server --kill-others \"yarn web\" \"yarn server\"",
+    "dev:app": "concurrently -n app,server --kill-others \"yarn ios\" \"yarn server\"",
+    "run-ios": "yarn workspace @foton/app run-ios",
+    "ios": "yarn workspace @foton/app ios",
+    "test:app": "yarn workspace @foton/app test",
+    "test:web": "yarn workspace @foton/web test",
+    "test:server": "yarn workspace @foton/server test",
+    "precommit": "yarn lint-staged"
+  },
+  "dependencies": {
+    "graphql": "^14.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "@types/graphql": "^14.0.4",
+    "@types/jest": "^24.0.11",
+    "@types/styled-components": "^4.1.5",
+    "@typescript-eslint/eslint-plugin": "^1.6.0",
+    "@typescript-eslint/parser": "^1.6.0",
+    "all-contributors-cli": "^5.7.0",
+    "babel-jest": "^24.7.1",
+    "babel-preset-gigatron": "0.0.1",
+    "concurrently": "^4.1.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-react": "^7.12.4",
+    "husky": "^1.3.1",
+    "jest": "^24.7.1",
+    "lint-staged": "^8.1.5",
+    "prettier": "^1.16.4",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.3"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix --ext js,ts",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{jsx,tsx,json}|*rc|*config": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit"
     }
+  }
 }

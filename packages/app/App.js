@@ -6,26 +6,24 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import { Platform, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import styled from 'styled-components/native';
-import OpenSettings from 'react-native-open-settings';
+import React, { Component } from 'react'
+import { Platform, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import styled from 'styled-components/native'
+import OpenSettings from 'react-native-open-settings'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+  android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu',
+})
 
-type Props = {};
+type Props = {}
 const MyText = styled(Text)`
-color: green;
-`;
+  color: green;
+`
 
 export default class App extends Component<Props> {
   handlePress = () => {
-    OpenSettings.openSettings();
+    OpenSettings.openSettings()
   }
 
   render() {
@@ -34,9 +32,11 @@ export default class App extends Component<Props> {
         <MyText style={styles.welcome}>Welcome to React Native!</MyText>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
-        <TouchableOpacity onPress={this.handlePress}><Text style={styles.welcome}>Open settings</Text></TouchableOpacity>
+        <TouchableOpacity onPress={this.handlePress}>
+          <Text style={styles.welcome}>Open settings</Text>
+        </TouchableOpacity>
       </View>
-    );
+    )
   }
 }
 
@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   button: {
-    marginTop: 30
-  }
-});
+    marginTop: 30,
+  },
+})

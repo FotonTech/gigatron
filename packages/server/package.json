@@ -1,26 +1,27 @@
 {
-    "name": "@foton/server",
-    "version": "0.0.1",
-    "description": "",
-    "main": "index.ts",
-    "scripts": {
-        "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec  \"ts-node\" src/index.ts"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "apollo-server": "^2.3.1",
-        "bcryptjs": "^2.4.3",
-        "dotenv": "^6.2.0",
-        "graphql": "^14.0.2",
-        "jsonwebtoken": "^8.4.0",
-        "mongoose": "^5.4.4",
-        "nodemon": "^1.18.10",
-        "ts-node": "^8.0.2",
-        "typescript": "^3.2.2"
-    },
-    "devDependencies": {
-        "@types/bcryptjs": "^2.4.2",
-        "@types/mongoose": "^5.3.7"
-    }
+  "name": "@foton/server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec  \"ts-node\" src/index.ts",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.3.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^6.2.0",
+    "graphql": "^14.0.2",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.4",
+    "nodemon": "^1.18.10",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.2.2"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/mongoose": "^5.3.7"
+  }
 }

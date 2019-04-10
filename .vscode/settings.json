@@ -1,6 +1,6 @@
 {
   "[javascript]": {
-    "editor.formatOnSave": false
+    "editor.formatOnSave": true
   },
   "editor.formatOnPaste": false,
   "eslint.autoFixOnSave": true,
