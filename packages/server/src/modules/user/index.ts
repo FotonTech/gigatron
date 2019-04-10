@@ -1,83 +1,83 @@
-import UserType from "./UserType";
-import * as Loader from "./UserLoader";
-import createConnection from "../utils/createConnection";
+import UserType from './UserType'
+import * as Loader from './UserLoader'
+import createConnection from '../utils/createConnection'
 
 import {
-    GraphQLNonNull,
-    GraphQLID,
-    GraphQLInt,
-    GraphQLString,
-    GraphQLInputObjectType
-} from "graphql";
+  GraphQLNonNull,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLString,
+  GraphQLInputObjectType,
+} from 'graphql'
 
 export const queries = {
-    me: {
-        type: UserType,
-        resolve: (object, args, ctx) => ctx.me
+  me: {
+    type: UserType,
+    resolve: (object: any, args: any, ctx: any) => ctx.me,
+  },
+  users: {
+    type: createConnection(UserType, 'UserConnection'),
+    args: {
+      size: {
+        type: GraphQLNonNull(GraphQLInt),
+      },
+      page: {
+        type: GraphQLNonNull(GraphQLInt),
+      },
     },
-    users: {
-        type: createConnection(UserType, "UserConnection"),
-        args: {
-            size: {
-                type: GraphQLNonNull(GraphQLInt)
-            },
-            page: {
-                type: GraphQLNonNull(GraphQLInt)
-            }
-        },
-        resolve: Loader.Users
+    resolve: Loader.Users,
+  },
+  user: {
+    type: UserType,
+    args: {
+      id: {
+        type: GraphQLNonNull(GraphQLID),
+      },
     },
-    user: {
-        type: UserType,
-        args: {
-            id: {
-                type: GraphQLNonNull(GraphQLID)
-            }
-        },
-        resolve: Loader.User
-    }
-};
+    resolve: Loader.User,
+  },
+}
 
 export const mutations = {
-    addUser: {
-        type: UserType,
-        args: {
-            input: {
-                type: new GraphQLInputObjectType({
-                    name: "AddUserInput",
-                    fields: () => ({
-                        name: {
-                            type: GraphQLString
-                        },
-                        email: {
-                            type: GraphQLString
-                        },
-                        password: {
-                            type: GraphQLString
-                        }
-                    })
-                })
-            }
-        },
-        resolve: Loader.AddUser
+  addUser: {
+    type: UserType,
+    args: {
+      input: {
+        type: new GraphQLInputObjectType({
+          name: 'AddUserInput',
+          fields: () => ({
+            name: {
+              type: GraphQLString,
+            },
+            email: {
+              type: GraphQLString,
+            },
+            password: {
+              type: GraphQLString,
+            },
+          }),
+        }),
+      },
     },
-    loginUser: {
-        type: UserType,
-        args: {
-            input: {
-                type: new GraphQLInputObjectType({
-                    name: "LoginUserInput",
-                    fields: () => ({
-                        email: {
-                            type: GraphQLString
-                        },
-                        password: {
-                            type: GraphQLString
-                        }
-                    })
-                })
-            }
-        },
-        resolve: Loader.LoginUser
-    }
-};
+    resolve: Loader.AddUser,
+  },
+  loginUser: {
+    type: UserType,
+    args: {
+      input: {
+        type: new GraphQLInputObjectType({
+          name: 'LoginUserInput',
+          fields: () => ({
+            email: {
+              type: GraphQLString,
+            },
+            password: {
+              type: GraphQLString,
+            },
+          }),
+        }),
+      },
+    },
+    resolve: Loader.LoginUser,
+  },
+}
