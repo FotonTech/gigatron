@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import OpenSettings from 'react-native-open-settings'
+import Hello from '@foton/shared/components/Hello'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -27,6 +28,7 @@ export default class App extends Component<Props> {
         <TouchableOpacity onPress={this.handlePress}>
           <Text style={styles.welcome}>Open settings</Text>
         </TouchableOpacity>
+        <Hello />
       </View>
     )
   }
