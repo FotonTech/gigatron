@@ -13,7 +13,7 @@
     },
     {
       "src": "packages/server/src/index.ts",
-      "use": "@now/node-server@0.4.23"
+      "use": "@now/node-server"
     }
   ],
   "routes": [
