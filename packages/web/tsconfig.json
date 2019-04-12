@@ -6,8 +6,8 @@
     "allowJs": true,
     "skipLibCheck": true,
     "module": "esnext",
-    "isolatedModules": true,
-    "jsx": "preserve"
+    "declaration": false,
+    "isolatedModules": true
   },
   "include": ["src"]
 }
