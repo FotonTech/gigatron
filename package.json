@@ -29,6 +29,10 @@
   "dependencies": {
     "graphql": "^14.0.2"
   },
+  "resolutions": {
+    "**/mongoose/**/mongodb": "^3.1.13",
+    "**/mongoose/**/mongodb-core": "^3.1.13"
+  },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.4.3",
