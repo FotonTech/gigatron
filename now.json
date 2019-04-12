@@ -13,7 +13,7 @@
     },
     {
       "src": "packages/server/src/index.ts",
-      "use": "@now/node-server"
+      "use": "@now/node-server@canary"
     }
   ],
   "routes": [
