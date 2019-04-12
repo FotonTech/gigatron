@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec  \"ts-node\" src/index.ts",
+    "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
     "test": "jest"
   },
   "author": "",
@@ -17,7 +17,7 @@
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.4",
     "nodemon": "^1.18.10",
-    "ts-node": "^8.0.2",
+    "ts-node": "^7.0.2",
     "typescript": "^3.2.2"
   },
   "devDependencies": {
