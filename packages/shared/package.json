@@ -4,11 +4,9 @@
   "private": true,
   "dependencies": {
     "react": "16.8.3",
-    "react-dom": "^16.8.6"
-  },
-  "peerDependencies": {
-    "react-native": "0.59.3",
-    "styled-components": "^4.1.1"
+    "react-dom": "^16.8.6",
+    "styled-components": "^4.1.0",
+    "react-native": "0.59.3"
   },
   "devDependencies": {
     "@types/react-native": "^0.57.42",

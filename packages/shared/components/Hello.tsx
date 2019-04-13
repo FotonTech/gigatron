@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import styled from 'styled-components/native'
 
 type Props = {}
+
+const HelloText = styled(Text)`
+  color: pink;
+  font-size: 15;
+`
 
 export default class Hello extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.hello}>Hello</Text>
+        <HelloText>Hello</HelloText>
       </View>
     )
   }
@@ -18,9 +24,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  hello: {
-    color: 'pink',
-    fontSize: 15,
   },
 })
