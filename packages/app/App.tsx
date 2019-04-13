@@ -2,16 +2,12 @@ import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import OpenSettings from 'react-native-open-settings'
-import Hello from '@foton/shared/components/Hello'
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu',
-})
+import Welcome from '@foton/shared/components/Welcome'
 
 type Props = {}
-const MyText = styled(Text)`
-  color: green;
+const Instructions = styled(Text)`
+  text-align: center;
+  margin: 10px;
 `
 
 export default class App extends Component<Props> {
@@ -22,13 +18,12 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <MyText style={styles.welcome}>Welcome to React Native!</MyText>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <Welcome />
+        <Instructions>To get started, edit App.js</Instructions>
         <TouchableOpacity onPress={this.handlePress}>
           <Text style={styles.welcome}>Open settings</Text>
+          <Text style={styles.small}>(this is a native lib)</Text>
         </TouchableOpacity>
-        <Hello />
       </View>
     )
   }
@@ -44,10 +39,13 @@ const styles = StyleSheet.create({
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    marginBottom: 10,
+  },
+  small: {
+    fontSize: 10,
+    textAlign: 'center',
   },
   instructions: {
-    textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
   },

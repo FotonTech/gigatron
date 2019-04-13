@@ -4,16 +4,16 @@ import styled from 'styled-components/native'
 
 type Props = {}
 
-const HelloText = styled(Text)`
-  color: pink;
-  font-size: 15;
+const WelcomeText = styled(Text)`
+  color: #a300fb;
+  font-size: 23;
 `
 
 export default class Hello extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <HelloText>Hello</HelloText>
+        <WelcomeText>Welcome to Gigatron 🤖</WelcomeText>
       </View>
     )
   }
