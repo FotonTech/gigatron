@@ -17,8 +17,8 @@ jobs:
             - npm-cache-{{ .Branch }}
             - npm-cache-
       - run:
-          name: NPM Install
-          command: npm install
+          name: yarn
+          command: yarn
       - save_cache:
           key: npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
