@@ -25,6 +25,7 @@ module.exports = function override(config, env) {
       __DEV__: env !== 'production',
     }),
   )
+  config.resolve.extensions = [...config.resolve.extensions, '.ts', '.tsx']
 
   return config
 }
