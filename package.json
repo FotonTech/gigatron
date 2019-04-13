@@ -45,7 +45,7 @@
     "@typescript-eslint/eslint-plugin": "^1.6.0",
     "@typescript-eslint/parser": "^1.6.0",
     "all-contributors-cli": "^5.7.0",
-    "babel-preset-gigatron": "0.0.1",
+    "babel-preset-gigatron": "1.0.0",
     "concurrently": "^4.1.0",
     "eslint": "5.12.0",
     "eslint-config-prettier": "^4.1.0",
