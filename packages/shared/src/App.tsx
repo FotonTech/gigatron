@@ -1,10 +1,11 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import styled from 'styled-components'
+import Button from './components/Button.tsx'
 
 const App = () => (
   <Wrapper>
-    <WelcomeText> Welcome to gigatron </WelcomeText>
+    <Button text='Click me' />
   </Wrapper>
 )
 
