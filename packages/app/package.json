@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "run-ios": "react-native run-ios",
-    "ios": "open ios/app.xcodeproj"
+    "ios": "open ios/app.xcodeproj",
+    "postinstall": "../../scripts/avoidReactNativeNameCollision.js"
   },
   "dependencies": {
     "react": "16.8.3",

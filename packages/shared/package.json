@@ -11,5 +11,8 @@
   "devDependencies": {
     "@types/react-native": "^0.57.42",
     "react-test-renderer": "16.8.3"
+  },
+  "scripts": {
+    "postinstall": "../../scripts/avoidReactNativeNameCollision.js"
   }
 }

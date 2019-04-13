@@ -17,7 +17,8 @@
     "build": "react-scripts build",
     "now-build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "../../scripts/avoidReactNativeNameCollision.js"
   },
   "browserslist": [
     ">0.2%",
