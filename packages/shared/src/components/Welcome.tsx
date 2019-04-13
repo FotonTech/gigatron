@@ -23,5 +23,4 @@ const WelcomeText = styled(Text)`
 const Container = styled(View)`
   justify-content: center;
   align-items: center;
-  background-color: #f5fcff;
 `

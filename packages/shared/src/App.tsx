@@ -1,6 +1,6 @@
 import React from 'react'
-import Button from './components/Button'
-import styled from 'styled-components'
+import Welcome from './components/Welcome'
+import styled from 'styled-components/native'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -10,6 +10,6 @@ const Wrapper = styled.View`
 
 export default () => (
   <Wrapper>
-    <Button text='bleeding fking edge' />
+    <Welcome />
   </Wrapper>
 )
