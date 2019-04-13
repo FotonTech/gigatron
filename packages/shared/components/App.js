@@ -1,17 +1,18 @@
 import React from 'react'
 import Welcome from './Welcome'
-import styled from 'styled-components/native'
+import { View } from 'react-native'
+// import styled from 'styled-components/native'
 
-const Wrapper = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`
+// const Wrapper = styled.View`
+//   flex: 1;
+//   justify-content: center;
+//   align-items: center;
+// `
 
 const App = () => (
-  <Wrapper>
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Welcome />
-  </Wrapper>
+  </View>
 )
 
 export default App
