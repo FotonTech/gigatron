@@ -1,0 +1,54 @@
+defaults: &defaults
+  docker:
+    - image: circleci/node:8.10.0
+  working_directory: ~/tmp/circlci-now
+
+version: 2
+jobs:
+  checkout:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/tmp/circlci-now
+      - restore_cache:
+          keys:
+            - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
+            - npm-cache-{{ .Branch }}
+            - npm-cache-
+      - run:
+          name: NPM Install
+          command: npm install
+      - save_cache:
+          key: npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: .
+          paths: .
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/tmp/circlci-now
+      - run:
+          name: Install Now CLI
+          command: sudo npm install --global --unsafe-perm now
+      - deploy:
+          name: Deploy & Alias
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                now --token $ZEIT_TOKEN --local-config .now/now.json --target production
+            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+                now --token $ZEIT_TOKEN --local-config .now/now.staging.json
+                now --token $ZEIT_TOKEN --local-config .now/now.staging.json alias
+            else
+                echo ${CIRCLE_BRANCH}
+            fi
+workflows:
+  version: 2
+  test-deploy-purge:
+    jobs:
+      - checkout
+      - deploy
