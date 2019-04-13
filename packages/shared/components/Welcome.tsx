@@ -1,28 +1,27 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import styled from 'styled-components/native'
 
 type Props = {}
 
-const WelcomeText = styled(Text)`
-  color: #a300fb;
-  font-size: 23;
-`
-
-export default class Hello extends Component<Props> {
+export default class Welcome extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
+      <Container>
         <WelcomeText>Welcome to Gigatron 🤖</WelcomeText>
-      </View>
+      </Container>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-})
+const WelcomeText = styled(Text)`
+  color: #a300fb;
+  font-size: 23;
+  margin: 40px;
+`
+
+const Container = styled(View)`
+  justify-content: center;
+  align-items: center;
+  background-color: #f5fcff;
+`
