@@ -8,12 +8,13 @@
       "src": "packages/web/package.json",
       "use": "@now/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "build",
+        "newPipeline": true
       }
     },
     {
       "src": "packages/server/src/index.ts",
-      "use": "@now/node-server@0.5.2"
+      "use": "@now/node-server@canary"
     }
   ],
   "routes": [
@@ -53,6 +54,12 @@
       "dest": "/packages/web/index.html"
     }
   ],
+  "build": {
+    "env": {
+      "NODE_ENV": "development",
+      "REACT_APP_SERVER": "https://gigatron.now.sh/graphql"
+    }
+  },
   "env": {
     "NODE_ENV": "development",
     "GRAPHQL_PORT": "5000",
