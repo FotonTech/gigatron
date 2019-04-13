@@ -5,7 +5,7 @@
 Gigatron
 </h1>
 
-<p align="center">The best boilerplate for your Monorepo Fullstack projects.</p>
+<p align="center">The best boilerplate for your Monorepo Fullstack projects</p>
 
 <p align="center">
   <a href="http://makeapullrequest.com">
@@ -25,7 +25,6 @@ Gigatron
 
 This boilerplate contains all you need to start your next monorepo Fullstack project.
 
-
 ## Getting started
 
 1. Clone this repo using `https://github.com/FotonTech/gigatron.git`
@@ -40,6 +39,7 @@ This boilerplate contains all you need to start your next monorepo Fullstack pro
 ## Using React Native
 
 - To add package foobar to app
+
 ```
 cd packages/app
 yarn add foobar
@@ -64,7 +64,6 @@ yarn add foobar
 
 - [ ] **Now serverless auto deployment**: Better HMR support;
 
-
 ## License
 
 MIT license, Copyright (c) 2019 Foton.
@@ -77,6 +76,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/all-contri
 <!-- prettier-ignore -->
 | [<img src="https://avatars0.githubusercontent.com/u/13947203?v=4" width="100px;"/><br /><sub><b>Jabur</b></sub>](https://github.com/jaburcodes)<br />[💬](#question-jaburcodes "Answering Questions") [🐛](https://github.com/FotonTech/gigatron/issues?q=author%3Ajaburcodes "Bug reports") [💻](https://github.com/FotonTech/gigatron/commits?author=jaburcodes "Code") [🤔](#ideas-jaburcodes "Ideas, Planning, & Feedback")  | [<img src="https://avatars1.githubusercontent.com/u/7690649?v=4" width="100px;"/><br /><sub><b>paulogdm</b></sub>](https://paulogdm.com)<br /> [💻](https://github.com/FotonTech/gigatron/commits?author=paulogdm "Code") [🚇](#infra-paulogdm "Infrastructure (Hosting, Build-Tools, etc)") [🛡️](#security-paulogdm "Security") [🔧](#tool-paulogdm "Tools") |
 | :---: | :---: |
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
