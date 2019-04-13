@@ -8,10 +8,6 @@ const writeFile = util.promisify(fs.writeFile)
 const renameFile = util.promisify(fs.rename)
 
 async function main() {
-  const wd = process.cwd()
-  if (!/gigatron$/.test(wd)) {
-    throw new Error(`\npost install script ${process.argv[1]} should be run from monorepo root\n`)
-  }
   await renameFile(
     'packages/shared/node_modules/react-native',
     'packages/shared/node_modules/react-native2',
