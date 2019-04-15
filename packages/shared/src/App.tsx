@@ -5,14 +5,16 @@ import Button from './components/Button'
 
 const App = () => (
   <Wrapper>
-    <Button text='Click me' />
+    <Button text='Login' />
+    <Button text='Signup' />
   </Wrapper>
 )
 
 const Wrapper = styled(View)`
   flex: 1;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+  flex-direction: row;
 `
 
 export default App
