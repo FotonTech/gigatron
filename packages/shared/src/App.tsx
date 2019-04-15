@@ -1,13 +1,19 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Platform } from 'react-native'
 import styled from 'styled-components'
+import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { createBrowserApp } from '@react-navigation/web'
 import Button from './components/Button'
+import { ApolloProvider } from 'react-apollo'
+import client from './apollo'
 
 const App = () => (
-  <Wrapper>
-    <Button text='Login' />
-    <Button text='Signup' />
-  </Wrapper>
+  <ApolloProvider client={client}>
+    <Wrapper>
+      <Button text='Login' />
+      <Button text='Signup' />
+    </Wrapper>
+  </ApolloProvider>
 )
 
 const Wrapper = styled(View)`
@@ -17,4 +23,13 @@ const Wrapper = styled(View)`
   flex-direction: row;
 `
 
-export default App
+const rootNavigator = createStackNavigator(
+  {
+    Login: { screen: App },
+  },
+  { initialRouteName: 'Login' },
+)
+
+export default (Platform.OS === 'web'
+  ? createBrowserApp(rootNavigator)
+  : createAppContainer(rootNavigator))

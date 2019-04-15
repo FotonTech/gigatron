@@ -11,7 +11,9 @@
       "**/styled-components",
       "**/styled-components/**",
       "**/react-native-*",
-      "**/react-native-*/**"
+      "**/react-native-*/**",
+      "**/@react-navigation/web*",
+      "**/@react-navigation/web*/**"
     ]
   },
   "scripts": {
