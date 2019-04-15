@@ -1,19 +1,26 @@
-import React, { Component } from 'react'
-import { Text, TouchableOpacity } from 'react-native'
-import styled from 'styled-components/native'
+import React from 'react'
+import { TouchableOpacity, Text } from 'react-native'
+import styled from 'styled-components'
 
-const RedButton = styled.TouchableOpacity`
-  width: 100px;
-  height: 50px;
-  background-color: red;
+const Button = props => (
+  <Wrapper>
+    <WelcomeText>{props.text}</WelcomeText>
+  </Wrapper>
+)
+
+const Wrapper = styled(TouchableOpacity)`
+  flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: #ff0000;
+  width: 200px;
+  height: 60px;
+  border-radius: 5px;
 `
 
-const Button = ({ text }) => (
-  <RedButton>
-    <Text>{text}</Text>
-  </RedButton>
-)
+const WelcomeText = styled(Text)`
+  color: #ffffff;
+  font-size: 23px;
+`
 
 export default Button
