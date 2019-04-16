@@ -50,115 +50,72 @@ async function main() {
       'packages/shared/node_modules/react-native2',
     )
   } catch (error) {}
-  const todo = [
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/styled-components/native/dist/styled-components.native.cjs.js',
-      findString: "_interopDefault(require('react-native'))",
-      replaceWith: "_interopDefault(require('react-native2'))",
-    },
-    {
-      fileRelativePath: 'packages/shared/node_modules/react-navigation-stack/src/index.js',
-      findString: "import { Platform } from 'react-native'",
-      replaceWith: "import { Platform } from 'react-native2'",
-    },
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/@react-navigation/native/src/createKeyboardAwareNavigator.js',
-      findString: "import { TextInput } from 'react-native'",
-      replaceWith: "import { TextInput } from 'react-native2'",
-    },
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/@react-navigation/native/src/withOrientation.js',
-      findString: "import { Dimensions } from 'react-native'",
-      replaceWith: "import { Dimensions } from 'react-native2'",
-    },
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/@react-navigation/native/src/ResourceSavingSceneView.js',
-      findString: "import { Platform, StyleSheet, View } from 'react-native'",
-      replaceWith: "import { Platform, StyleSheet, View } from 'react-native2'",
-    },
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/@react-navigation/native/src/createAppContainer.js',
-      findString: "import { AsyncStorage, Linking, Platform, BackHandler } from 'react-native'",
-      replaceWith: "import { AsyncStorage, Linking, Platform, BackHandler } from 'react-native2'",
-    },
-    {
-      fileRelativePath: 'packages/shared/node_modules/@react-navigation/native/src/Scrollables.js',
-      findString:
-        "import { ScrollView, Platform, FlatList, SectionList, RefreshControl } from 'react-native'",
-      replaceWith:
-        "import { ScrollView, Platform, FlatList, SectionList, RefreshControl } from 'react-native2'",
-    },
-    {
-      fileRelativePath: 'packages/shared/node_modules/react-native-safe-area-view/index.js',
-      findString: "from 'react-native';",
-      replaceWith: "from 'react-native2';",
-    },
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/react-navigation-tabs/src/navigators/createBottomTabNavigator.js',
-      findString: "from 'react-native';",
-      replaceWith: "from 'react-native2';",
-    },
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/react-navigation-tabs/src/views/MaterialTopTabBar.js',
-      findString: "from 'react-native';",
-      replaceWith: "from 'react-native2';",
-    },
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/react-navigation-tabs/src/navigators/createMaterialTopTabNavigator.js',
-      findString: "from 'react-native';",
-      replaceWith: "from 'react-native2';",
-    },
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/react-navigation-stack/src/navigators/createStackNavigator.js',
-      findString: "from 'react-native';",
-      replaceWith: "from 'react-native2';",
-    },
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/react-navigation-tabs/src/views/BottomTabBar.js',
-      findString: "from 'react-native';",
-      replaceWith: "from 'react-native2';",
-    },
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/react-navigation-stack/src/views/Header/HeaderBackButton.js',
-      findString: "from 'react-native';",
-      replaceWith: "from 'react-native2';",
-    },
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/react-navigation-stack/src/views/Header/HeaderTitle.js',
-      findString: "from 'react-native';",
-      replaceWith: "from 'react-native2';",
-    },
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/react-navigation-stack/src/views/Header/HeaderStyleInterpolator.js',
-      findString: "from 'react-native';",
-      replaceWith: "from 'react-native2';",
-    },
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/react-navigation-stack/src/views/StackView/StackViewCard.js',
-      findString: "from 'react-native';",
-      replaceWith: "from 'react-native2';",
-    },
+  const todoRequire = [
+    'packages/shared/node_modules/styled-components/native/dist/styled-components.native.cjs.js',
   ]
 
-  for (const work of todo) {
-    const { fileRelativePath, findString, replaceWith } = work
-    const fileAsString = await readFile(fileRelativePath, 'utf-8')
-    const patchedFile = fileAsString.replace(findString, replaceWith)
-    await writeFile(fileRelativePath, patchedFile)
+  for (const path of todoRequire) {
+    const fileAsString = await readFile(path, 'utf-8')
+    const patchedFile = fileAsString.replace("require('react-native'", "require('react-native2'")
+    await writeFile(path, patchedFile)
+  }
+
+  const todoImport = [
+    'packages/shared/node_modules/react-navigation-stack/src/index.js',
+    'packages/shared/node_modules/@react-navigation/native/src/createKeyboardAwareNavigator.js',
+    'packages/shared/node_modules/@react-navigation/native/src/withOrientation.js',
+    'packages/shared/node_modules/@react-navigation/native/src/ResourceSavingSceneView.js',
+    'packages/shared/node_modules/@react-navigation/native/src/createAppContainer.js',
+    'packages/shared/node_modules/@react-navigation/native/src/Scrollables.js',
+    'packages/shared/node_modules/react-native-safe-area-view/index.js',
+    'packages/shared/node_modules/react-navigation-tabs/src/navigators/createBottomTabNavigator.js',
+    'packages/shared/node_modules/react-navigation-tabs/src/views/MaterialTopTabBar.js',
+    'packages/shared/node_modules/react-navigation-tabs/src/navigators/createMaterialTopTabNavigator.js',
+    'packages/shared/node_modules/react-navigation-stack/src/navigators/createStackNavigator.js',
+    'packages/shared/node_modules/react-navigation-tabs/src/views/BottomTabBar.js',
+    'packages/shared/node_modules/react-navigation-stack/src/views/Header/HeaderBackButton.js',
+    'packages/shared/node_modules/react-navigation-stack/src/views/Header/HeaderTitle.js',
+    'packages/shared/node_modules/react-navigation-stack/src/views/Header/HeaderStyleInterpolator.js',
+    'packages/shared/node_modules/react-navigation-stack/src/views/StackView/StackViewCard.js',
+    'packages/shared/node_modules/react-navigation-stack/src/views/Header/Header.js',
+    'packages/shared/node_modules/react-navigation-stack/src/views/StackView/StackViewLayout.js',
+    'packages/shared/node_modules/react-navigation-stack/src/views/StackView/StackViewStyleInterpolator.js',
+    'packages/shared/node_modules/react-navigation-stack/src/views/Transitioner.js',
+    'packages/shared/node_modules/react-navigation-drawer/dist/navigators/createDrawerNavigator.js',
+    'packages/shared/node_modules/react-navigation-drawer/dist/views/DrawerNavigatorItems.js',
+    'packages/shared/node_modules/react-navigation-drawer/dist/views/DrawerSidebar.js',
+    'packages/shared/node_modules/react-navigation-drawer/dist/views/DrawerView.js',
+    'packages/shared/node_modules/react-native-safe-area-view/withOrientation.js',
+    'packages/shared/node_modules/react-navigation-stack/src/views/Header/ModularHeaderBackButton.js',
+    'packages/shared/node_modules/react-navigation-stack/src/views/TouchableItem.js',
+    'packages/shared/node_modules/react-native-screens/src/screens.native.js',
+    'packages/shared/node_modules/react-navigation-stack/src/utils/ReactNativeFeatures.js',
+    'packages/shared/node_modules/react-navigation-drawer/dist/views/TouchableItem.js',
+    'packages/shared/node_modules/react-navigation-tabs/src/views/ResourceSavingScene.js',
+    'packages/shared/node_modules/react-navigation-tabs/src/views/CrossFadeIcon.js',
+    'packages/shared/node_modules/react-navigation-tabs/src/utils/withDimensions.js',
+    'packages/shared/node_modules/react-native-gesture-handler/DrawerLayout.js',
+    'packages/shared/node_modules/react-navigation-drawer/dist/views/ResourceSavingScene.js',
+    'packages/shared/node_modules/react-native-gesture-handler/Swipeable.js',
+    'packages/shared/node_modules/react-native-gesture-handler/GestureHandler.js',
+    'packages/shared/node_modules/react-navigation-stack/src/views/StackView/StackViewTransitionConfigs.js',
+  ]
+
+  for (const path of todoImport) {
+    const fileAsString = await readFile(path, 'utf-8')
+    const patchedFile = fileAsString.replace("from 'react-native'", "from 'react-native2'")
+    await writeFile(path, patchedFile)
+  }
+
+  const todoLibs = ['packages/shared/node_modules/react-native-screens/src/screens.native.js']
+
+  for (const path of todoLibs) {
+    const fileAsString = await readFile(path, 'utf-8')
+    const patchedFile = fileAsString.replace(
+      "from 'react-native/Libraries",
+      "from 'react-native2/Libraries",
+    )
+    await writeFile(path, patchedFile)
   }
 }
 
