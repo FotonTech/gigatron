@@ -6,9 +6,11 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "run-ios": "react-native run-ios",
     "ios": "open ios/app.xcodeproj",
-    "postinstall": "../../scripts/avoidReactNativeNameCollision.js"
+    "postinstall": "patch-package"
   },
   "dependencies": {
+    "patch-package": "^6.1.2",
+    "postinstall-postinstall": "^2.0.0",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
     "react-native": "0.59.3",
