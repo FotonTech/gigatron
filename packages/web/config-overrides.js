@@ -18,6 +18,7 @@ module.exports = function override(config, env) {
   config.module.rules[2].oneOf[1].include = appIncludes
   config.module.rules[2].oneOf[1].options.plugins = [
     require.resolve('babel-plugin-react-native-web'),
+    require.resolve('@babel/plugin-transform-modules-commonjs'),
   ].concat(config.module.rules[2].oneOf[1].options.plugins)
   config.module.rules = config.module.rules.filter(Boolean)
   config.plugins.push(
