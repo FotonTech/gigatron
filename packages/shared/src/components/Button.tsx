@@ -1,26 +1,27 @@
 import React from 'react'
-import { TouchableOpacity, Text } from 'react-native'
+import { View, Text } from 'react-native'
 import styled from 'styled-components'
 
 const Button = props => (
-  <Wrapper>
-    <WelcomeText>{props.text}</WelcomeText>
-  </Wrapper>
+  <Touchable>
+    <StyledText>{props.text}</StyledText>
+  </Touchable>
 )
 
-const Wrapper = styled(TouchableOpacity)`
-  flex: 1;
+const Touchable = styled(View)`
   justify-content: center;
   align-items: center;
-  background-color: #ff0000;
-  width: 200px;
+  background-color: #d5d5d5;
+  width: 150px;
   height: 60px;
   border-radius: 5px;
+  margin: 10px;
 `
 
-const WelcomeText = styled(Text)`
+const StyledText = styled(Text)`
   color: #ffffff;
-  font-size: 23px;
+  font-size: 21px;
+  font-weight: bold;
 `
 
 export default Button
