@@ -1,35 +1,28 @@
 import React from 'react'
 import { View, Platform } from 'react-native'
 import styled from 'styled-components'
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import { createBrowserApp } from '@react-navigation/web'
-import Button from './components/Button'
-import { ApolloProvider } from 'react-apollo'
-import client from './apollo'
+import NavigationService from './utils/navigation'
+import Login from './screens/Login'
+import Signup from './screens/Signup'
 
-const App = () => (
-  <ApolloProvider client={client}>
-    <Wrapper>
-      <Button text='Login' />
-      <Button text='Signup' />
-    </Wrapper>
-  </ApolloProvider>
-)
-
-const Wrapper = styled(View)`
-  flex: 1;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: row;
-`
-
-const rootNavigator = createStackNavigator(
+const MainNavigator = createSwitchNavigator(
   {
-    Login: { screen: App },
+    Login: { screen: Login },
+    Signup: { screen: Signup },
   },
   { initialRouteName: 'Login' },
 )
 
-export default (Platform.OS === 'web'
-  ? createBrowserApp(rootNavigator)
-  : createAppContainer(rootNavigator))
+const AppContainer = createAppContainer(MainNavigator)
+
+const Navigator = () => (
+  <AppContainer
+    ref={navigatorRef => {
+      NavigationService.setTopLevelNavigator(navigatorRef)
+    }}
+  />
+)
+
+export default (Platform.OS === 'web' ? createBrowserApp(MainNavigator) : Navigator)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, Text } from 'react-native'
+import { View, Text } from 'react-native'
 import styled from 'styled-components'
 
 const Button = props => (
@@ -8,7 +8,7 @@ const Button = props => (
   </Touchable>
 )
 
-const Touchable = styled(TouchableOpacity)`
+const Touchable = styled(View)`
   justify-content: center;
   align-items: center;
   background-color: #d5d5d5;
