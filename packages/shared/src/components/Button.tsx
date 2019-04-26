@@ -1,10 +1,14 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ActivityIndicator } from 'react-native'
 import styled from 'styled-components'
 
-const Button = props => (
+const Button = ({ text, isSubmitting }) => (
   <Touchable>
-    <StyledText>{props.text}</StyledText>
+    {isSubmitting ? (
+      <ActivityIndicator size='small' color='#0000ff' />
+    ) : (
+      <StyledText>{text}</StyledText>
+    )}
   </Touchable>
 )
 
@@ -16,7 +20,6 @@ const Touchable = styled(View)`
   height: 60px;
   border-radius: 5px;
   margin: 10px;
-  cursor: pointer;
 `
 
 const StyledText = styled(Text)`
