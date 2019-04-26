@@ -66,7 +66,7 @@ const Signup = props => {
   return (
     <Wrapper>
       <ImageWrapper>
-        <Image source={require('../../assets/giga.gif')} style={{ width: 150, height: 150 }} />
+        <Image source={require('../../assets/logoImg.png')} style={{ width: 150, height: 150 }} />
       </ImageWrapper>
       <Formik
         initialValues={{ name: '', email: '', password: '' }}
