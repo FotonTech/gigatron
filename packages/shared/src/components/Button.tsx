@@ -16,7 +16,6 @@ const Touchable = styled(View)`
   height: 60px;
   border-radius: 5px;
   margin: 10px;
-  cursor: pointer;
 `
 
 const StyledText = styled(Text)`
