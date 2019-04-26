@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "skipLibCheck": true,
+    "module": "esnext",
+    "isolatedModules": true,
+    "jsx": "preserve"
+  }
+}
