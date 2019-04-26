@@ -1,10 +1,14 @@
-import React from 'react'
+import * as React from 'react'
 import { View, Text, Image, TouchableOpacity, Platform } from 'react-native'
 import styled from 'styled-components'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
 import Link from '../utils/Link'
-import { Formik } from 'formik'
+import { ModalContext } from '../App'
 
 const Wrapper = styled(View)`
   flex: 1;
@@ -50,25 +54,41 @@ const ButtonsWrapper = styled(View)`
 `
 
 const Login = props => {
-  const handleSubmit = values => {}
+  const handleSubmit = async values => {
+    const { email, password } = values
+    const { mutate } = props
+    try {
+      const response = await mutate({ variables: { input: { email, password } } })
+    } catch (e) {
+      console.log('e', e.message)
+      // const value = useContext(ModalContext)
+      console.log('setModal value', value)
+    }
+  }
 
   return (
     <Wrapper>
       <ImageWrapper>
         <Image source={require('../../assets/giga.gif')} style={{ width: 150, height: 150 }} />
       </ImageWrapper>
-      <Formik initialValues={{ email: '', password: '' }} onSubmit={values => handleSubmit(values)}>
-        {({ values, handleChange, handleSubmit, errors }) => (
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        onSubmit={values => handleSubmit(values)}
+        validationSchema={validationSchema}
+      >
+        {({ values, handleChange, handleSubmit, errors, isSubmitting }) => (
           <FormikWrapper>
             <TextInput
               placeholder='email'
               onChangeText={handleChange('email')}
               value={values.email}
+              error={errors.email}
             />
             <TextInput
               placeholder='password'
               onChangeText={handleChange('password')}
               value={values.password}
+              error={errors.password}
             />
             <SignupWrapper>
               <Link routeName='Signup'>
@@ -77,7 +97,7 @@ const Login = props => {
             </SignupWrapper>
             <ButtonsWrapper>
               <TouchableOpacity onPress={() => handleSubmit()}>
-                <Button text='Login' />
+                <Button text='Login' isSubmitting={isSubmitting} />
               </TouchableOpacity>
             </ButtonsWrapper>
           </FormikWrapper>
@@ -87,4 +107,22 @@ const Login = props => {
   )
 }
 
-export default Login
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+  password: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+})
+
+const LOGIN_MUTATION = gql`
+  mutation loginUser($input: LoginUserInput!) {
+    loginUser(input: $input) {
+      email
+    }
+  }
+`
+
+export default graphql(LOGIN_MUTATION)(Login)

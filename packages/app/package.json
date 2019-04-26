@@ -11,8 +11,8 @@
   "dependencies": {
     "patch-package": "^6.1.2",
     "postinstall-postinstall": "^2.0.0",
-    "react": "16.8.3",
-    "react-dom": "^16.8.6",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
     "react-native": "0.59.3",
     "react-native-gesture-handler": "^1.1.0",
     "styled-components": "^4.1.3"

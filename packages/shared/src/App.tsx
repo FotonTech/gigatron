@@ -1,28 +1,20 @@
-import React from 'react'
-import { View, Platform } from 'react-native'
-import styled from 'styled-components'
-import { createSwitchNavigator, createAppContainer } from 'react-navigation'
-import { createBrowserApp } from '@react-navigation/web'
-import NavigationService from './utils/navigation'
-import Login from './screens/Login'
-import Signup from './screens/Signup'
+import React, { createContext, useState } from 'react'
+import { ApolloProvider } from 'react-apollo'
+import apolloClient from './config/apollo'
+import Router from './Router'
 
-const MainNavigator = createSwitchNavigator(
-  {
-    Login: { screen: Login },
-    Signup: { screen: Signup },
-  },
-  { initialRouteName: 'Login' },
-)
+export const ModalContext = createContext(null)
 
-const AppContainer = createAppContainer(MainNavigator)
+const App = () => {
+  // const [modal, setModal] = useState(false)
 
-const Navigator = () => (
-  <AppContainer
-    ref={navigatorRef => {
-      NavigationService.setTopLevelNavigator(navigatorRef)
-    }}
-  />
-)
+  return (
+    <ModalContext.Provider>
+      <ApolloProvider client={apolloClient}>
+        <Router />
+      </ApolloProvider>
+    </ModalContext.Provider>
+  )
+}
 
-export default (Platform.OS === 'web' ? createBrowserApp(MainNavigator) : Navigator)
+export default App
