@@ -1,0 +1,18 @@
+diff --git a/node_modules/metro-resolver/src/resolve.js b/node_modules/metro-resolver/src/resolve.js
+index c7e8b3e..65b842d 100644
+--- a/node_modules/metro-resolver/src/resolve.js
++++ b/node_modules/metro-resolver/src/resolve.js
+@@ -157,6 +157,13 @@ function resolve(context, moduleName, platform) {
+     if (result.type === "resolved") {
+       return result.resolution;
+     }
++
++    const patchedModuleName = realModuleName.replace('react-native', 'react-native2')
++    const result2 = resolveFileOrDir(context, patchedModuleName, platform)
++
++    if (result2.type === 'resolved') {
++      return result2.resolution
++    }
+   }
+ 
+   throw new FailedToResolveNameError(dirPaths, extraPaths);

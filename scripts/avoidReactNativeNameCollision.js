@@ -4,7 +4,6 @@ const fs = require('fs')
 const util = require('util')
 
 const readFile = util.promisify(fs.readFile)
-const writeFile = util.promisify(fs.writeFile)
 const renameFile = util.promisify(fs.rename)
 const statFile = util.promisify(fs.stat)
 
@@ -44,25 +43,17 @@ async function main() {
     return console.warn('Already patched')
   }
 
-  await renameFile(
-    'packages/shared/node_modules/react-native',
-    'packages/shared/node_modules/react-native2',
-  )
-  const todo = [
-    {
-      fileRelativePath:
-        'packages/shared/node_modules/styled-components/native/dist/styled-components.native.cjs.js',
-      findString: "_interopDefault(require('react-native'))",
-      replaceWith: "_interopDefault(require('react-native2'))",
-    },
-  ]
-
-  for (const work of todo) {
-    const { fileRelativePath, findString, replaceWith } = work
-    const fileAsString = await readFile(fileRelativePath, 'utf-8')
-    const patchedFile = fileAsString.replace(findString, replaceWith)
-    await writeFile(fileRelativePath, patchedFile)
-  }
+  try {
+    // we use hoisted react-native just to have nicer react-native link
+    // but this will confuse metro bc it'll see two node_modules/react-native so
+    // we rename shared/node_modules/react-native to shared/node_modules/react-native2 and
+    // this fixes that. We also patch metro to look for react-native2 when it fails to resolve react-native under packages/shared.
+    // This patch is in packages/app/patches
+    await renameFile(
+      'packages/shared/node_modules/react-native',
+      'packages/shared/node_modules/react-native2',
+    )
+  } catch (error) {}
 }
 
 main()

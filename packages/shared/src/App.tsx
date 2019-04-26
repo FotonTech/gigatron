@@ -1,18 +1,28 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Platform } from 'react-native'
 import styled from 'styled-components'
-import Button from './components/Button'
+import { createSwitchNavigator, createAppContainer } from 'react-navigation'
+import { createBrowserApp } from '@react-navigation/web'
+import NavigationService from './utils/navigation'
+import Login from './screens/Login'
+import Signup from './screens/Signup'
 
-const App = () => (
-  <Wrapper>
-    <Button text='Click me' />
-  </Wrapper>
+const MainNavigator = createSwitchNavigator(
+  {
+    Login: { screen: Login },
+    Signup: { screen: Signup },
+  },
+  { initialRouteName: 'Login' },
 )
 
-const Wrapper = styled(View)`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`
+const AppContainer = createAppContainer(MainNavigator)
 
-export default App
+const Navigator = () => (
+  <AppContainer
+    ref={navigatorRef => {
+      NavigationService.setTopLevelNavigator(navigatorRef)
+    }}
+  />
+)
+
+export default (Platform.OS === 'web' ? createBrowserApp(MainNavigator) : Navigator)
