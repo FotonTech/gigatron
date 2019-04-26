@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity, Platform } from 'react-native'
 import styled from 'styled-components'
 import { Formik } from 'formik'
@@ -8,7 +8,6 @@ import gql from 'graphql-tag'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
 import Link from '../utils/Link'
-import { ModalContext } from '../App'
 
 const Wrapper = styled(View)`
   flex: 1;
@@ -61,8 +60,6 @@ const Login = props => {
       const response = await mutate({ variables: { input: { email, password } } })
     } catch (e) {
       console.log('e', e.message)
-      // const value = useContext(ModalContext)
-      console.log('setModal value', value)
     }
   }
 
@@ -120,7 +117,7 @@ const validationSchema = Yup.object().shape({
 const LOGIN_MUTATION = gql`
   mutation loginUser($input: LoginUserInput!) {
     loginUser(input: $input) {
-      email
+      token
     }
   }
 `
