@@ -2,6 +2,10 @@ import React from 'react'
 import { TextInput } from 'react-native'
 import styled from 'styled-components'
 
+interface Props {
+  error: any
+}
+
 const GigaText = styled(TextInput)`
   justify-content: center;
   align-items: center;
@@ -13,7 +17,7 @@ const GigaText = styled(TextInput)`
   padding-left: 10px;
   border-color: #d5d5d5;
   border-width: 2px;
-  ${p => p.error && `border-color: red`}
+  ${(p: Props) => p.error && `border-color: red`}
 `
 
 export default props => <GigaText {...props} />
