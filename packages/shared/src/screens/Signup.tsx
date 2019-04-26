@@ -11,7 +11,7 @@ import Link from '../utils/Link'
 
 const Wrapper = styled(View)`
   flex: 1;
-  height: 100%;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;
