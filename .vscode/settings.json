@@ -13,5 +13,6 @@
   "prettier.requireConfig": true,
   "javascript.updateImportsOnFileMove.enabled": "never",
   "tslint.autoFixOnSave": true,
-  "tslint.alwaysShowStatus": true
+  "tslint.alwaysShowStatus": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

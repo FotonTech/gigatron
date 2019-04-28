@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity, AsyncStorage, Alert } from 'react-native'
 import styled from 'styled-components'
-import { Formik } from 'formik'
+import { Formik, FormikActions } from 'formik'
 import * as Yup from 'yup'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -10,19 +10,22 @@ import TextInput from '../components/TextInput'
 import Link from '../utils/Link'
 import { vh, grey85 } from '../utils/styling'
 
+const initialValues = { name: '', email: '', password: '' }
+type InitialValues = typeof initialValues
+
 const Signup = props => {
-  const handleSubmit = async values => {
+  const handleSubmit = async (values: InitialValues, actions: FormikActions<InitialValues>) => {
     const { name, email, password } = values
     const { mutate } = props
     try {
       const response = await mutate({ variables: { input: { name, email, password } } })
-      console.log('login response', response)
+      // console.log('login response', response)
       const { token } = response.data.addUser
       if (!token) {
         throw response
       }
       await AsyncStorage.setItem('token', token)
-      console.log('did token', token)
+      actions.setSubmitting(false)
     } catch (e) {
       console.log('signup error', e)
       if (/User already exists/.test(e.message)) {
@@ -37,8 +40,8 @@ const Signup = props => {
         <Image source={require('../../assets/logoImg.png')} style={{ width: 150, height: 150 }} />
       </ImageWrapper>
       <Formik
-        initialValues={{ name: '', email: '', password: '' }}
-        onSubmit={values => handleSubmit(values)}
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         {({ values, handleChange, handleSubmit, errors, isSubmitting }) => (
@@ -69,7 +72,10 @@ const Signup = props => {
             />
             <SignupWrapper>
               <Link routeName='Login'>
-                <Text>Back to login</Text>
+                <View>
+                  <Text>Back to login</Text>
+                  <Text>{isSubmitting.toString()}</Text>
+                </View>
               </Link>
             </SignupWrapper>
             <ButtonsWrapper>
