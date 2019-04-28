@@ -19,18 +19,19 @@ const Signup = props => {
     const { mutate } = props
     try {
       const response = await mutate({ variables: { input: { name, email, password } } })
-      // console.log('login response', response)
+      // console.log('Signup response', response)
       const { token } = response.data.addUser
       if (!token) {
         throw response
       }
       await AsyncStorage.setItem('token', token)
-      actions.setSubmitting(false)
     } catch (e) {
       console.log('signup error', e)
       if (/User already exists/.test(e.message)) {
-        return Alert.alert('User already exists')
+        Alert.alert('User already exists')
       }
+    } finally {
+      actions.setSubmitting(false)
     }
   }
 
@@ -72,10 +73,7 @@ const Signup = props => {
             />
             <SignupWrapper>
               <Link routeName='Login'>
-                <View>
-                  <Text>Back to login</Text>
-                  <Text>{isSubmitting.toString()}</Text>
-                </View>
+                <Text>Back to login</Text>
               </Link>
             </SignupWrapper>
             <ButtonsWrapper>

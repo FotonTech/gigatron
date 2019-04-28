@@ -1,7 +1,7 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Alert, AsyncStorage } from 'react-native'
 import styled from 'styled-components'
-import { Formik } from 'formik'
+import { Formik, FormikActions } from 'formik'
 import * as Yup from 'yup'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -11,19 +11,28 @@ import Link from '../utils/Link'
 import { vh } from '../utils/styling'
 import { grey85 } from '../utils/styling'
 
-type Login = {
-  email: string
-  password: string
-}
+const initialValues = { email: '', password: '' }
+type InitialValues = typeof initialValues
 
 const Login = props => {
-  const handleSubmit = async (values: Login) => {
+  const handleSubmit = async (values: InitialValues, actions: FormikActions<InitialValues>) => {
     const { email, password } = values
     const { mutate } = props
     try {
       const response = await mutate({ variables: { input: { email, password } } })
+      // console.log('Login response', response)
+      const { token } = response.data.loginUser
+      if (!token) {
+        throw response
+      }
+      await AsyncStorage.setItem('token', token)
     } catch (e) {
-      console.log('e', e.message)
+      console.log('login error', e.message)
+      if (e.message) {
+        Alert.alert(e.message.replace('GraphQL error: ', ''))
+      }
+    } finally {
+      actions.setSubmitting(false)
     }
   }
 
@@ -34,7 +43,7 @@ const Login = props => {
       </ImageWrapper>
       <Formik
         initialValues={{ email: '', password: '' }}
-        onSubmit={values => handleSubmit(values)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         {({ values, handleChange, handleSubmit, errors, isSubmitting }) => (
