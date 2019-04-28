@@ -24,12 +24,12 @@ export const Users = async (object, args, ctx) => {
 
 export const User = (object, args, ctx) => UserModel.findOne({ id: args.id })
 
-export const AddUser = async (object, args, ctx) => {
+export const AddUser = async (object: any, args: any, ctx: any) => {
   const { name, email, password } = args.input
   const currentUser = await UserModel.findOne({ email })
 
   if (currentUser) {
-    return { error: 'User already exists' }
+    throw new Error('User already exists')
   }
 
   const user = new UserModel({
