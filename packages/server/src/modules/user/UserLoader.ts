@@ -24,12 +24,12 @@ export const Users = async (object, args, ctx) => {
 
 export const User = (object, args, ctx) => UserModel.findOne({ id: args.id })
 
-export const AddUser = async (object, args, ctx) => {
+export const AddUser = async (object: any, args: any, ctx: any) => {
   const { name, email, password } = args.input
   const currentUser = await UserModel.findOne({ email })
 
   if (currentUser) {
-    return { error: 'User already exists' }
+    throw new Error('User already exists')
   }
 
   const user = new UserModel({
@@ -48,7 +48,7 @@ export const AddUser = async (object, args, ctx) => {
 export const LoginUser = async (object, args, ctx) => {
   const { email, password } = args.input
   if (!email || !password) {
-    return { error: 'Email and password must be provided' }
+    throw new Error('Email and password must be provided')
   }
 
   const user = await UserModel.findOne({ email })
@@ -57,7 +57,7 @@ export const LoginUser = async (object, args, ctx) => {
     throw new Error('User doesnt exist')
   }
 
-  console.log('user', user)
+  console.log('found user', user)
   //@ts-ignore
   const isPasswordCorrect = authenticate(password, user.password)
 
