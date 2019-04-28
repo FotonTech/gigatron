@@ -1,7 +1,7 @@
 import React, { ReactChild } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Link } from '@react-navigation/web'
-import NavigationService from '../navigation'
+import NavigationService from './navigation'
 import { isWeb } from './constants'
 import { NavigationParams } from 'react-navigation'
 

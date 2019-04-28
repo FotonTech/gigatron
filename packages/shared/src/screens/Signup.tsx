@@ -7,11 +7,12 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
-import Link from '../utils/crossPlatform/Link'
+import Link from '../utils/Link'
+import { vh } from '../utils/styling'
 
 const Wrapper = styled(View)`
   flex: 1;
-  height: 100vh;
+  height: ${vh(100)};
   justify-content: center;
   align-items: center;
   flex-direction: column;
