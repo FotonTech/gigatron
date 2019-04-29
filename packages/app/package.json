@@ -9,6 +9,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.3.3",
     "patch-package": "^6.1.2",
     "postinstall-postinstall": "^2.0.0",
     "react": "16.8.6",
