@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
-import { AsyncStorage } from '../utils/native'
+import { View, Text, Image, TouchableOpacity, AsyncStorage, Alert } from 'react-native'
 import styled from 'styled-components'
 import { Formik, FormikActions } from 'formik'
 import * as Yup from 'yup'
@@ -28,8 +27,8 @@ const Signup = props => {
       await AsyncStorage.setItem('token', token)
     } catch (e) {
       console.log('signup error', e)
-      if (e.message) {
-        Alert.alert(e.message.replace(/\w+ error: /, ''))
+      if (/User already exists/.test(e.message)) {
+        Alert.alert('User already exists')
       }
     } finally {
       actions.setSubmitting(false)
