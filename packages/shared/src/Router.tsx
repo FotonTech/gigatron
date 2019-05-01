@@ -1,27 +1,45 @@
 import React from 'react'
 import { Platform } from 'react-native'
-import { createSwitchNavigator, createAppContainer } from 'react-navigation'
+import { createSwitchNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
 import { createBrowserApp } from '@react-navigation/web'
 import NavigationService from './utils/navigation'
 import Login from './screens/Login'
 import Signup from './screens/Signup'
 
-const MainNavigator = createSwitchNavigator(
+let Router: any = null
+
+const MainNavigator = createStackNavigator(
   {
     Login: { screen: Login },
     Signup: { screen: Signup },
   },
-  { initialRouteName: 'Login' },
+  {
+    initialRouteName: 'Login',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+  },
 )
 
-const AppContainer = createAppContainer(MainNavigator)
+if (Platform.OS !== 'web') {
+  const AppContainer = createAppContainer(MainNavigator)
 
-const Navigator = () => (
-  <AppContainer
-    ref={navigatorRef => {
-      NavigationService.setTopLevelNavigator(navigatorRef)
-    }}
-  />
-)
+  const Navigator = () => (
+    <AppContainer
+      ref={navigatorRef => {
+        NavigationService.setTopLevelNavigator(navigatorRef)
+      }}
+    />
+  )
 
-export default (Platform.OS === 'web' ? createBrowserApp(MainNavigator) : Navigator)
+  Router = Navigator
+} else {
+  Router = createBrowserApp(MainNavigator)
+}
+export default Router
