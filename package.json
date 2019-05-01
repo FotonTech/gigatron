@@ -13,9 +13,7 @@
       "**/react-native-*",
       "**/react-native-*/**",
       "**/@react-navigation/web*",
-      "**/@react-navigation/web*/**",
-      "**/@react-native-community*",
-      "**/@react-native-community*/**"
+      "**/@react-navigation/web*/**"
     ]
   },
   "scripts": {

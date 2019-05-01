@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
-import { AsyncStorage } from '../utils/native'
+import { View, Text, Image, TouchableOpacity, Alert, AsyncStorage } from 'react-native'
 import styled from 'styled-components'
 import { Formik, FormikActions } from 'formik'
 import * as Yup from 'yup'
@@ -30,7 +29,7 @@ const Login = props => {
     } catch (e) {
       console.log('login error', e.message)
       if (e.message) {
-        Alert.alert(e.message.replace(/\w+ error: /, ''))
+        Alert.alert(e.message.replace('GraphQL error: ', ''))
       }
     } finally {
       actions.setSubmitting(false)
