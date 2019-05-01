@@ -1,0 +1,55 @@
+diff --git a/node_modules/@react-native-community/async-storage/lib/AsyncStorage.js b/node_modules/@react-native-community/async-storage/lib/AsyncStorage.js
+index ef4d1b2..df47829 100644
+--- a/node_modules/@react-native-community/async-storage/lib/AsyncStorage.js
++++ b/node_modules/@react-native-community/async-storage/lib/AsyncStorage.js
+@@ -18,24 +18,24 @@ const RCTAsyncStorage =
+   NativeModules.RNCAsyncStorage ||
+   NativeModules.PlatformLocalStorage; // Support for external modules, like react-native-windows
+ 
+-if (!RCTAsyncStorage) {
+-  throw new Error(`[@RNC/AsyncStorage]: NativeModule: AsyncStorage is null.
++// if (!RCTAsyncStorage) {
++//   throw new Error(`[@RNC/AsyncStorage]: NativeModule: AsyncStorage is null.
+ 
+-To fix this issue try these steps:
++// To fix this issue try these steps:
+ 
+-  • Run \`react-native link @react-native-community/async-storage\` in the project root.
++//   • Run \`react-native link @react-native-community/async-storage\` in the project root.
+ 
+-  • Rebuild and restart the app.
++//   • Rebuild and restart the app.
+ 
+-  • Run the packager with \`--clearCache\` flag.
++//   • Run the packager with \`--clearCache\` flag.
+ 
+-  • If you are using CocoaPods on iOS, run \`pod install\` in the \`ios\` directory and then rebuild and re-run the app.
++//   • If you are using CocoaPods on iOS, run \`pod install\` in the \`ios\` directory and then rebuild and re-run the app.
+ 
+-  • If this happens while testing with Jest, check out docs how to integrate AsyncStorage with it: https://github.com/react-native-community/react-native-async-storage/blob/master/docs/Jest-integration.md
++//   • If this happens while testing with Jest, check out docs how to integrate AsyncStorage with it: https://github.com/react-native-community/react-native-async-storage/blob/master/docs/Jest-integration.md
+ 
+-If none of these fix the issue, please open an issue on the Github repository: https://github.com/react-native-community/react-native-async-storage/issues 
+-`);
+-}
++// If none of these fix the issue, please open an issue on the Github repository: https://github.com/react-native-community/react-native-async-storage/issues
++// `);
++// }
+ 
+ type ReadOnlyArrayString = $ReadOnlyArray<string>;
+ 
+@@ -362,10 +362,10 @@ const AsyncStorage = {
+ };
+ 
+ // Not all native implementations support merge.
+-if (!RCTAsyncStorage.multiMerge) {
+-  delete AsyncStorage.mergeItem;
+-  delete AsyncStorage.multiMerge;
+-}
++// if (!RCTAsyncStorage.multiMerge) {
++//   delete AsyncStorage.mergeItem;
++//   delete AsyncStorage.multiMerge;
++// }
+ 
+ function convertErrors(errs): ?$ReadOnlyArray<?Error> {
+   if (!errs) {

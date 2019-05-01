@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage'
+import { AsyncStorage } from '../utils/native'
 import styled from 'styled-components'
 import { Formik, FormikActions } from 'formik'
 import * as Yup from 'yup'

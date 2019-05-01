@@ -2,14 +2,12 @@
   "parserOptions": {
     "sourceType": "module"
   },
-  "ecmaFeatures": {
-    "jsx": true
-  },
   "env": {
     "node": true,
     "jest": true,
     "browser": true,
-    "mongo": true
+    "mongo": true,
+    "es6": true
   },
   "parser": "babel-eslint",
   "extends": [
