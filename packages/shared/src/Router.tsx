@@ -1,6 +1,6 @@
 import React from 'react'
 import { Platform } from 'react-native'
-import { createSwitchNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
+import { createAppContainer, createStackNavigator } from 'react-navigation'
 import { createBrowserApp } from '@react-navigation/web'
 import NavigationService from './utils/navigation'
 import Login from './screens/Login'
