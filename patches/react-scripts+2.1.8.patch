@@ -1,0 +1,14 @@
+diff --git a/node_modules/react-scripts/scripts/utils/verifyTypeScriptSetup.js b/node_modules/react-scripts/scripts/utils/verifyTypeScriptSetup.js
+index fa4b5c8..309b488 100644
+--- a/node_modules/react-scripts/scripts/utils/verifyTypeScriptSetup.js
++++ b/node_modules/react-scripts/scripts/utils/verifyTypeScriptSetup.js
+
+@@ -114,7 +115,7 @@ function verifyTypeScriptSetup() {
+       reason: 'to match webpack resolution',
+     },
+     resolveJsonModule: { value: true, reason: 'to match webpack loader' },
+-    isolatedModules: { value: true, reason: 'implementation limitation' },
++    // isolatedModules: { value: true, reason: 'implementation limitation' },
+     noEmit: { value: true },
+     jsx: {
+       parsedValue: ts.JsxEmit.Preserve,

@@ -28,7 +28,8 @@
     "test:app": "yarn workspace @foton/app test",
     "test:web": "yarn workspace @foton/web test",
     "test:server": "yarn workspace @foton/server test",
-    "precommit": "yarn lint-staged"
+    "precommit": "yarn lint-staged",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
