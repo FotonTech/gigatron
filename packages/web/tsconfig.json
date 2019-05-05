@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "allowJs": true,
+    "declaration": false,
     "skipLibCheck": true,
     "module": "esnext",
     "isolatedModules": true,
