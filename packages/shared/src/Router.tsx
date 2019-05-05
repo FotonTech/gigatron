@@ -1,12 +1,12 @@
 import React from 'react'
-import { Platform } from 'react-native'
+import { Platform, View } from 'react-native'
 import { createAppContainer, createStackNavigator, createSwitchNavigator } from 'react-navigation'
 import { createBrowserApp } from '@react-navigation/web'
 import NavigationService from './utils/navigation'
 import Login from './screens/Login'
 import Signup from './screens/Signup'
 
-let Router: (() => JSX.Element) | null = null
+let Router: (() => JSX.Element) | null = () => <View />
 let navigator = Platform.OS === 'web' ? createSwitchNavigator : createStackNavigator
 
 const MainNavigator = navigator(
