@@ -1,0 +1,182 @@
+diff --git a/node_modules/react-native-web/dist/cjs/exports/Text/index.js b/node_modules/react-native-web/dist/cjs/exports/Text/index.js
+index 1003bc9..30e0bf5 100644
+--- a/node_modules/react-native-web/dist/cjs/exports/Text/index.js
++++ b/node_modules/react-native-web/dist/cjs/exports/Text/index.js
+@@ -68,7 +68,7 @@ function (_Component) {
+     var isInAParentText = this.context.isInAParentText;
+ 
+     if (process.env.NODE_ENV !== 'production') {
+-      (0, _warning.default)(this.props.className == null, 'Using the "className" prop on <Text> is deprecated.');
++      // (0, _warning.default)(this.props.className == null, 'Using the "className" prop on <Text> is deprecated.');
+     }
+ 
+     if (onPress) {
+diff --git a/node_modules/react-native-web/dist/cjs/exports/View/index.js b/node_modules/react-native-web/dist/cjs/exports/View/index.js
+index 61d92b6..cfbd636 100644
+--- a/node_modules/react-native-web/dist/cjs/exports/View/index.js
++++ b/node_modules/react-native-web/dist/cjs/exports/View/index.js
+@@ -60,7 +60,7 @@ function (_Component) {
+     var supportedProps = (0, _filterSupportedProps.default)(this.props);
+ 
+     if (process.env.NODE_ENV !== 'production') {
+-      (0, _warning.default)(this.props.className == null, 'Using the "className" prop on <View> is deprecated.');
++      // (0, _warning.default)(this.props.className == null, 'Using the "className" prop on <View> is deprecated.');
+ 
+       _react.default.Children.toArray(this.props.children).forEach(function (item) {
+         (0, _invariant.default)(typeof item !== 'string', "Unexpected text node: " + item + ". A text node cannot be a child of a <View>.");
+diff --git a/node_modules/react-native-web/dist/exports/Text/index.js b/node_modules/react-native-web/dist/exports/Text/index.js
+index 46b1190..2323b7d 100644
+--- a/node_modules/react-native-web/dist/exports/Text/index.js
++++ b/node_modules/react-native-web/dist/exports/Text/index.js
+@@ -62,7 +62,7 @@ function (_Component) {
+     var isInAParentText = this.context.isInAParentText;
+ 
+     if (process.env.NODE_ENV !== 'production') {
+-      warning(this.props.className == null, 'Using the "className" prop on <Text> is deprecated.');
++      // warning(this.props.className == null, 'Using the "className" prop on <Text> is deprecated.');
+     }
+ 
+     if (onPress) {
+diff --git a/node_modules/react-native-web/dist/exports/View/index.js b/node_modules/react-native-web/dist/exports/View/index.js
+index d11a402..0988ce7 100644
+--- a/node_modules/react-native-web/dist/exports/View/index.js
++++ b/node_modules/react-native-web/dist/exports/View/index.js
+@@ -50,7 +50,7 @@ function (_Component) {
+     var supportedProps = filterSupportedProps(this.props);
+ 
+     if (process.env.NODE_ENV !== 'production') {
+-      warning(this.props.className == null, 'Using the "className" prop on <View> is deprecated.');
++      // warning(this.props.className == null, 'Using the "className" prop on <View> is deprecated.');
+       React.Children.toArray(this.props.children).forEach(function (item) {
+         invariant(typeof item !== 'string', "Unexpected text node: " + item + ". A text node cannot be a child of a <View>.");
+       });
+diff --git a/node_modules/react-native-web/dist/vendor/react-native/Animated/nodes/AnimatedNode.js b/node_modules/react-native-web/dist/vendor/react-native/Animated/nodes/AnimatedNode.js
+index a7a6ae4..999c04e 100644
+--- a/node_modules/react-native-web/dist/vendor/react-native/Animated/nodes/AnimatedNode.js
++++ b/node_modules/react-native-web/dist/vendor/react-native/Animated/nodes/AnimatedNode.js
+@@ -17,7 +17,7 @@ var AnimatedNode =
+ /*#__PURE__*/
+ function () {
+   function AnimatedNode() {}
+-
++  console.log('Hi')
+   var _proto = AnimatedNode.prototype;
+ 
+   _proto.__attach = function __attach() {};
+@@ -60,7 +60,7 @@ function () {
+       NativeAnimatedHelper.API.createAnimatedNode(nativeTag, this.__getNativeConfig());
+       this.__nativeTag = nativeTag;
+     }
+-
++    console.log('native tag is', this.__nativeTag)
+     return this.__nativeTag;
+   };
+ 
+@@ -72,7 +72,8 @@ function () {
+     return this.__getValue();
+   };
+ 
++  console.log('inside AnimatedNode', AnimatedNode)
+   return AnimatedNode;
+ }();
+-
++console.log('exporting', AnimatedNode)
+ export default AnimatedNode;
+\ No newline at end of file
+diff --git a/node_modules/react-native-web/dist/vendor/react-native/Animated/nodes/AnimatedProps.js b/node_modules/react-native-web/dist/vendor/react-native/Animated/nodes/AnimatedProps.js
+index fde52e6..f3a749e 100644
+--- a/node_modules/react-native-web/dist/vendor/react-native/Animated/nodes/AnimatedProps.js
++++ b/node_modules/react-native-web/dist/vendor/react-native/Animated/nodes/AnimatedProps.js
+@@ -21,7 +21,6 @@ import AnimatedStyle from './AnimatedStyle';
+ import NativeAnimatedHelper from '../NativeAnimatedHelper';
+ import findNodeHandle from '../../../../exports/findNodeHandle';
+ import invariant from 'fbjs/lib/invariant';
+-
+ var AnimatedProps =
+ /*#__PURE__*/
+ function (_AnimatedNode) {
+@@ -54,7 +53,7 @@ function (_AnimatedNode) {
+     for (var key in this._props) {
+       var value = this._props[key];
+ 
+-      if (value instanceof AnimatedNode) {
++      if (value instanceof (AnimatedNode)) {
+         if (!value.__isNative || value instanceof AnimatedStyle) {
+           // We cannot use value of natively driven nodes this way as the value we have access from
+           // JS may not be up to date.
+@@ -76,7 +75,7 @@ function (_AnimatedNode) {
+     for (var key in this._props) {
+       var value = this._props[key];
+ 
+-      if (value instanceof AnimatedNode) {
++      if (value instanceof (AnimatedNode)) {
+         props[key] = value.__getAnimatedValue();
+       }
+     }
+@@ -84,11 +83,11 @@ function (_AnimatedNode) {
+     return props;
+   };
+ 
+-  _proto.__attach = function __attach() {
++    _proto.__attach = function __attach() {
++    console.trace('sup')
+     for (var key in this._props) {
+       var value = this._props[key];
+-
+-      if (value instanceof AnimatedNode) {
++      if (value instanceof (AnimatedNode)) {
+         value.__addChild(this);
+       }
+     }
+@@ -106,7 +105,6 @@ function (_AnimatedNode) {
+         value.__removeChild(this);
+       }
+     }
+-
+     _AnimatedNode.prototype.__detach.call(this);
+   };
+ 
+@@ -121,7 +119,7 @@ function (_AnimatedNode) {
+       for (var key in this._props) {
+         var value = this._props[key];
+ 
+-        if (value instanceof AnimatedNode) {
++        if (value instanceof (AnimatedNode)) {
+           value.__makeNative();
+         }
+       }
+@@ -164,7 +162,7 @@ function (_AnimatedNode) {
+     for (var propKey in this._props) {
+       var value = this._props[propKey];
+ 
+-      if (value instanceof AnimatedNode) {
++      if (value instanceof (AnimatedNode)) {
+         propsConfig[propKey] = value.__getNativeTag();
+       }
+     }
+diff --git a/node_modules/react-native-web/src/exports/Text/index.js b/node_modules/react-native-web/src/exports/Text/index.js
+index 5393cc1..890e0cc 100644
+--- a/node_modules/react-native-web/src/exports/Text/index.js
++++ b/node_modules/react-native-web/src/exports/Text/index.js
+@@ -62,7 +62,7 @@ class Text extends Component<*> {
+     const { isInAParentText } = this.context;
+ 
+     if (process.env.NODE_ENV !== 'production') {
+-      warning(this.props.className == null, 'Using the "className" prop on <Text> is deprecated.');
++      // warning(this.props.className == null, 'Using the "className" prop on <Text> is deprecated.');
+     }
+ 
+     if (onPress) {
+diff --git a/node_modules/react-native-web/src/exports/View/index.js b/node_modules/react-native-web/src/exports/View/index.js
+index 25d386d..ff7729e 100644
+--- a/node_modules/react-native-web/src/exports/View/index.js
++++ b/node_modules/react-native-web/src/exports/View/index.js
+@@ -45,7 +45,7 @@ class View extends Component<ViewProps> {
+     const supportedProps = filterSupportedProps(this.props);
+ 
+     if (process.env.NODE_ENV !== 'production') {
+-      warning(this.props.className == null, 'Using the "className" prop on <View> is deprecated.');
++      // warning(this.props.className == null, 'Using the "className" prop on <View> is deprecated.');
+ 
+       React.Children.toArray(this.props.children).forEach(item => {
+         invariant(

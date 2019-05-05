@@ -38,6 +38,7 @@
   "rules": {
     "no-unused-vars": "warn",
     "no-console": "off",
+    "no-empty": "off",
     "arrow-body-style": "off",
     "prettier/prettier": "off",
     "no-restricted-globals": "warn"
