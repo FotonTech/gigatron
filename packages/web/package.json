@@ -11,9 +11,9 @@
     "react-scripts": "2.1.8"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "now-build": "react-app-rewired build",
+    "start": "yarn tsc --build && react-app-rewired start",
+    "build": "yarn tsc --build && react-app-rewired build",
+    "now-build": "yarn tsc --build && react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
   },
