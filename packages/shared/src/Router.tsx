@@ -6,7 +6,7 @@ import NavigationService from './utils/navigation'
 import Login from './screens/Login'
 import Signup from './screens/Signup'
 
-let Router: (() => JSX.Element) | null = () => <View />
+let Router: () => JSX.Element = () => <View />
 let navigator = Platform.OS === 'web' ? createSwitchNavigator : createStackNavigator
 
 const MainNavigator = navigator(
