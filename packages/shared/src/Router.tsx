@@ -1,14 +1,15 @@
 import React from 'react'
 import { Platform } from 'react-native'
-import { createSwitchNavigator, createAppContainer, createStackNavigator } from 'react-navigation'
+import { createAppContainer, createStackNavigator, createSwitchNavigator } from 'react-navigation'
 import { createBrowserApp } from '@react-navigation/web'
 import NavigationService from './utils/navigation'
 import Login from './screens/Login'
 import Signup from './screens/Signup'
 
-let Router: any = null
+let Router: (() => JSX.Element) | null = null
+let navigator = Platform.OS === 'web' ? createSwitchNavigator : createStackNavigator
 
-const MainNavigator = createStackNavigator(
+const MainNavigator = navigator(
   {
     Login: { screen: Login },
     Signup: { screen: Signup },
