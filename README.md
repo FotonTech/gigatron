@@ -1,3 +1,8 @@
+# gigatron
+
+# ATTENTION: This repository is read-only, since it was only used during an internship process we had at Foton.
+# For more details about our stack, visit https://github.com/FotonTech/golden-stack.
+
 <h1 align="center">
 <br>
   <a href="https://github.com/FotonTech/gigatron"><img src="https://i.imgur.com/LVlSk6u.gif" alt="Gigatron" width=228"></a>
